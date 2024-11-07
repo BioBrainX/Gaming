@@ -12,10 +12,12 @@ Attr: {
 
 Gears: {
 	Brand: {
-		511: {
-			set: [],
-		},
+		default:[],
+		511: [, {HLT:.1},{XIH:.2},{HZP:.1}],
 	},
-	Set: {},
+	Set: {
+		Strikr: [, , { WHL: .15 }, { ROF: .15 },
+			_ => { }]
+	},
 },
 };
