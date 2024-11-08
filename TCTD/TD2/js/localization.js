@@ -2,13 +2,20 @@ const lang = {
 en: {
 	// Attributes
 	// Offensives
+	ARD: 'AR damage',
 	CHC: 'Critical hit chance',
 	CHD: 'Critical hit damage',
 	DOC: 'Damage to target out of cover',
 	DTA: 'Damage to armor',
 	HLD: 'Health damage',
 	HSD: 'HeadShot damage',
+	LMD: 'LGM damage',
+	MMD: 'MMR damage',
+	PTD: 'Pistol damage',
+	RFD: 'Rifle damage',
 	ROF: 'Rate of fire',
+	SGD: 'Shotgun damage',
+	SMD: 'SMG damage',
 	WHL: 'Weapon handling',
 	WPD: 'Weapon damage',
 	// Defensives
