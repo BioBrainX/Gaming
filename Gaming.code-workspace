@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../B10Libs"
+		},
+		{
+			"path": "../testJS"
 		}
 	],
 	"settings": {}

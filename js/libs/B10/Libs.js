@@ -165,4 +165,9 @@ function is(...x) {
 module.exports = {
 	Ƒor,
 	is,
-}
+	ø,
+	_ø,
+	_inf,
+	ƒø,
+	Obj,
+};
