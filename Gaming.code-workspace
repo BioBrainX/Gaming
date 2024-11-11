@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../testJS"
+		},
+		{
+			"path": "../Tst-Nodejs"
 		}
 	],
 	"settings": {}
