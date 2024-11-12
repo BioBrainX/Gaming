@@ -89,18 +89,34 @@ _G: { // Gears
 		} //set bonuses, {attr1:v},{attr2:v},{attr3:v}
 	],
 
-
-	_W: { // Weapons
-		_A: { // Attributes
-			[_O]: {
-				[_cor]: { DWP: .15 },
-				[_mjr]: { DHL: .21, DOC: .1, DHS: 1.11, DCH: .17, DTA: .12, CHC: .21 },
-				[_mñr]: { CHC: .095, DCH: .1, DHS: .1, DOC: .1, WRF: .05 }
-			},
-			[_U]: {
-				[_mñr]: { WSB: .12, WAC: .12, WOR: .24, WSW: .15, WRL: .12, WMS: .125 }
-			},
-		}
+	Brand: {},
+	Green: {
+		_dfult: [
+			{
+				b: {
+					name: 'backpack',
+					_Talent: ƒø,
+				},
+				v: {
+					name: 'vest',
+					_Talent: ƒø,
+				},
+			}
+		],
 	},
+	Xotc: {},
+},
+
+_W: { // Weapons
+	_A: { // Attributes
+		[_O]: {
+			[_cor]: { DWP: .15 },
+			[_mjr]: { DHL: .21, DOC: .1, DHS: 1.11, DCH: .17, DTA: .12, CHC: .21 },
+			[_mñr]: { CHC: .095, DCH: .1, DHS: .1, DOC: .1, WRF: .05 }
+		},
+		[_U]: {
+			[_mñr]: { WSB: .12, WAC: .12, WOR: .24, WSW: .15, WRL: .12, WMS: .125 }
+		},
+	}
 },
 };
