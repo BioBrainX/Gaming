@@ -11,7 +11,7 @@ Perks={
 	Speedy:{ƒ:Char=>Math.min(Char.Lv.Spd,10)},
 	Tolerant:{ƒ:Char=>Char.Morale.Penalties-=unknown},
 	// Negatives
-	Aggresive:{ƒ:Char=>{Char.Skills.Strength.xpMult+=.1;Char.Agression+=unknown}},
+	Aggresive:{ƒ:Char=>{Char.Skills.Strength.xpMult+=.1; Char.Agression+=unknown}},
 	Anxious:{ƒ:Char=>Char.Morale.Penalties+=unknown},
 	Disgusting:{ƒ:Char=>{Char.ComfortMult=0}},
 	Faint_Heart:{ƒ:Char=>Char.deMoralize.bloodCorpse+=unknown},
@@ -58,8 +58,8 @@ Combo={ // Begining
 			Perks:[ Germaphobe,Morbid_Curiosity,Imsoniac ],
 			Loves:[ Cleaning,Doctor,Research,Chemistry ],
 			Refuse:![ Harvest.Xeno,Carry.Corpse ],
-			Break:[ Violent_Outburst,Maniac ],
 			FreeTime:[ Intellectual ],
+			Break:[ Violent_Outburst,Maniac ],
 		},
 		Miner_Engineer_Farmer:{
 			Skills:[ Mining,Engineer,Botanist,Programming ],
@@ -114,20 +114,21 @@ Combo={ // Begining
 	},
 	Min:{
 		Researcher:{
+			Skills:[ {Doctor:+10} ],
 			Perks:[ Imsoniac ],
 			FreeTime:[ Intellectual ],
-			Jobs:[ Researching,Cleaning,Chef ]
+			Jobs:[ Researching,Cleaning,Chef,Carry ]
 		},
 		Miner:{
 			Loves:[ Pilot,Mining ],
 			FreeTime:[ Spiritual ],
-			Jobs:[ Mining,Pilot,Engineer,Farming ]
+			Jobs:[ Mining,Pilot,Engineer,Farming,Carry,Engineer,Farming ]
 		},
 		Carrier:{
 			Perks:![ Pacifist ],
-			Refuse:![ Carry ],
+			Refuse:![ Carry,Security,Explore ],
 			FreeTime:[ Athletic ],
-			Jobs:[ Carry,Power.Generation ],
+			Jobs:[ Carry,Power.Generation,Security,Explore ],
 		},
 		Doctor:{
 			Perks:[ Morbid_Curiosity ],
