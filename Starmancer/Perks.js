@@ -30,7 +30,7 @@ Perks={
 		},
 		ƒ:Char=>Char.Skills.Janitor.xpMult+=.5,
 	},
-	Multiple_Personality:{ƒ:Char=>Game.newDay && Char.currentPerks[2]=Perks.rand()},
+	Multiple_Personality:{ƒ:Char=>Game.newDay && (Char.currentPerks[2]=Perks.rand())},
 	Mute:unknown,
 	Nyctophobia:null, //afraid of the dark
 	Pacifist:{
@@ -76,7 +76,7 @@ Combo={ // Begining
 		Doctor:{
 			Skills:[ {Doctor:+10},Janitor,Chemistry ],
 			Perks:[ Germaphobe,Morbid_Curiosity ],
-			Loves:[ Cleaning,Doctor,Chemistry ]
+			Loves:[ Cleaning,Doctor,Chemistry ],
 			Hates:![ Research ],
 			Refuse:![ Carry.Corpse ],
 			FreeTime:[ Intellectual ],
@@ -89,7 +89,7 @@ Combo={ // Begining
 		Guard_Carrier:{
 			Skills:[ Health,Speed,Strength ],
 			Perks:![ Pacifist ],
-			Loves:[ Scavenge,Carry,Power.Generation ]
+			Loves:[ Scavenge,Carry,Power.Generation ],
 			Hates:![ Security ],
 			Refuse:![ Security ],
 			FreeTime:[ Athletic ],
@@ -101,14 +101,14 @@ Combo={ // Begining
 			FreeTime:[ Athletic ],
 		},
 		Researcher:{
-			Loves:[ Researching ]
+			Loves:[ Researching ],
 			Perks:[ Imsoniac ],
 			FreeTime:[ Intellectual ],
 		},
 		Hunter:{
 			Skills:[ Health,Strength ],
 			Perks:![ Pacifist ],
-			Loves:[ Explore,Security ]
+			Loves:[ Explore,Security ],
 			FreeTime:[ Athletic ],
 		},
 	},
@@ -178,7 +178,7 @@ Skills={
 	}},
 	Loves:skills=>{skills.forEach(s=>Char.s.xpMult+=.25)},
 	Hates:skills=>{skills.forEach(s=>Char.s.xpMult-=.15)},
-	Refuse:skills=>{skills.forEach(s=>Char.s.enable=false},
+	Refuse:skills=>{skills.forEach(s=>Char.s.enable=false)},
 },
 FreeTimes=[
 	Athletic,		// Speed++ || Melee++ 
@@ -237,3 +237,4 @@ Needs={
 	Germ:{
 	},
 },
+_dummy=0;
