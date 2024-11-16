@@ -37,6 +37,16 @@ slots= {
 },
 
 TDdb= { // main dBase
+_A: {
+	list:{
+		// Offensives
+		CHC,DAR,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,
+		// Defensives
+		ARG,ARM,HIC,HLT,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,
+		// Utility
+		SFX,SKD,SKH,SKN,SKR,SKT,WAC,WAM,WHL,WMS,WOR,WRL,WSB,WSW,
+	},
+},
 SHD: {
 	// Offensive
 	CHC:0.1,
@@ -87,10 +97,10 @@ _G: {
 			RSC:0.1,
 		},
 		[_U]:{ SKH:0.12,SKR:0.2,SKN:0.1 },
+		slots:[_G|m|b|v],
 	},
 
-	_dfult:[
-		// default set
+	_dfult:[ // default set
 		{
 			avail:_G_all,
 			_A:[ _cor,_mñr,_mñr ],
@@ -183,4 +193,6 @@ _W: {
 		},
 	},
 },
+
+Player:[,,,] // 4 Players
 };
