@@ -1,4 +1,4 @@
-const // Categories IDs
+﻿const // Categories IDs
 	_O = 0b001, // Offensive
 	_D = 0b010, // Defensive
 	_U = 0b100, // Utility

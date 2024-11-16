@@ -1,4 +1,4 @@
-Ûpð(TDdb._G.Xotc, {
+﻿Ûpð(TDdb._G.Xotc, {
 	Memento: [
 		{
 			avail: _G | b,

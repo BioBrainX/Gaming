@@ -1,4 +1,4 @@
-const lang = {
+﻿const lang = {
 en: {
 	// Attributes
 	// Offensives

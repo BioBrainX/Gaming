@@ -1,4 +1,4 @@
-Ûpð(TDdb._G.Brand, {
+﻿Ûpð(TDdb._G.Brand, {
 	// Gears
 	511: [
 		{

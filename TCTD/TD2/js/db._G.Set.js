@@ -1,4 +1,4 @@
-Ûpð(TDdb._G.Green, {
+﻿Ûpð(TDdb._G.Green, {
 Strykr: [ // Striker
 	{
 		b: {
