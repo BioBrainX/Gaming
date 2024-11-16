@@ -2,7 +2,7 @@
 	// Gears
 	511: [
 		{
-			[_G.g]: {
+			g: {
 				úniq: {
 					name: 'Deathgrips',
 					_A: [, { AOK: 0.15 }],

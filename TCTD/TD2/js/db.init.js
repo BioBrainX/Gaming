@@ -8,12 +8,12 @@ const // Categories IDs
 	_mñr = 0b01000,
 	_G = 0b1000000,
 	//Gear slot ID
-	m = 0b000001,
-	b = 0b000010,
-	v = 0b000100,
-	g = 0b001000,
-	h = 0b010000,
-	k = 0b100000,
+	m = _G | 0b000001,
+	b = _G | 0b000010,
+	v = _G | 0b000100,
+	g = _G | 0b001000,
+	h = _G | 0b010000,
+	k = _G | 0b100000,
 	_G_all = _G | m | b | v | g | h | k,
 	_W = 0b1000,
 	//Weapon slot ID
