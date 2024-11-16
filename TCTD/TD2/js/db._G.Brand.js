@@ -1,4 +1,4 @@
-﻿Updt(TDdb._G.Brand, {
+﻿Ûpð(TDdb._G.Brand, {
 	// Gears
 	511: [
 		{
@@ -13,4 +13,4 @@
 		{ HIC:0.2 },
 		{ PHZ:0.1 },
 	],
-});
+})
