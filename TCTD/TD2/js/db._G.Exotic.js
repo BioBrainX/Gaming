@@ -1,4 +1,4 @@
-﻿Ûpð(TDdb._G.Xotc, {
+﻿Updt(TDdb._G.Xotc, {
 	Memento: [
 		{
 			avail: _G | b,
@@ -9,4 +9,4 @@
 			},
 		},
 	],
-});
+})

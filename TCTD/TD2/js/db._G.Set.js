@@ -1,4 +1,4 @@
-﻿Ûpð(TDdb._G.Green, {
+﻿Updt(TDdb._G.Green, {
 Strykr: [ // Striker
 	{
 		b: {
@@ -29,4 +29,4 @@ HF: [ // Hunter's Fury
 	{ OKA: .2, OKH: 1 },
 	_ => { } //talent
 ],
-});
+})
