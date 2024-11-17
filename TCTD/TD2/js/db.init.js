@@ -196,6 +196,7 @@ _W: {
 },
 
 Players:[,,,], // 4 Players
+_ITM:{}, // will contained all items
 };
 
 (_=>{ //initialize Players Attributes

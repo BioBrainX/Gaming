@@ -1,5 +1,6 @@
 ﻿const lang= {
 en: {
+	_display: `English`,
 	// Attributes
 	// Offensives
 	CHC: `Critical Hit Chance`,
@@ -50,6 +51,10 @@ en: {
 	WSB: `Stability`,
 	WSW: `Swap Speed`,
 },
-fr: {},
-es: {},
+fr: {
+	_display: `Français`,
+},
+es: {
+	_display: `Español`,
+},
 };
