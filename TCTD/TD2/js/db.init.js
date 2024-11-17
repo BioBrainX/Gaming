@@ -1,4 +1,6 @@
-﻿const // Categories IDs
+﻿clogt('TDdb')
+
+const // Categories IDs
 _O= 0b001, // Offensive
 _D= 0b010, // Defensive
 _U= 0b100, // Utility
@@ -38,14 +40,13 @@ slots= {
 
 TDdb= { // main dBase
 _A: {
-	list:{
+	list:
 		// Offensives
-		CHC,DAR,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,
+		`CHC,DAR,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
 		// Defensives
-		ARG,ARM,HIC,HLT,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,
+		`ARG,ARM,HIC,HLT,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,` +
 		// Utility
-		SFX,SKD,SKH,SKN,SKR,SKT,WAC,WAM,WHL,WMS,WOR,WRL,WSB,WSW,
-	},
+		`SFX,SKD,SKH,SKN,SKR,SKT,WAC,WAM,WHL,WMS,WOR,WRL,WSB,WSW`,
 },
 SHD: {
 	// Offensive
@@ -194,5 +195,15 @@ _W: {
 	},
 },
 
-Player:[,,,] // 4 Players
+Players:[,,,], // 4 Players
 };
+
+(_=>{ //initialize Players Attributes
+	const þ=TDdb, plyr=þ.Players,
+		_A=þ._A.list.split(',');
+	ƒor([0,4],p=>{
+		plyr[p]= {_A:{}};
+		for(let i in _A)
+			plyr[p]._A[_A[i]]= 0;
+	})
+})()
