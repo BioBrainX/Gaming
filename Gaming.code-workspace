@@ -1,15 +1,27 @@
 {
 	"folders": [
 		{
+			"name": "Gaming",
 			"path": "."
 		},
 		{
+			"name": "B10Libs",
 			"path": "../B10Libs"
 		},
 		{
+			"name": "testJS",
 			"path": "../testJS"
 		},
 		{
+			"name": "The Division 2",
+			"path": "../The Division 2"
+		},
+		{
+			"name": "The Division",
+			"path": "../The Division"
+		},
+		{
+			"name": "Tst-Nodejs",
 			"path": "../Tst-Nodejs"
 		}
 	]

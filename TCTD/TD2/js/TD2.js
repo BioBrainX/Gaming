@@ -1,4 +1,6 @@
-﻿clogtEnd('TDdb')
+﻿// 'use module';
+
+clogtEnd('TDdb')
 clogt('TD2')
 
 
