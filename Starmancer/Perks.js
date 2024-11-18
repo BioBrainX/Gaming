@@ -41,7 +41,7 @@ Perks={
 	},
 	PottyMouth:unknown,
 },
-Combo={ // Begining
+Combo={
 	Max:{
 		Generic:{
 			Skills:[ Speed,Strength ],
@@ -53,13 +53,13 @@ Combo={ // Begining
 			Break:[],
 			Jobs:[ Carry,Scavenge,Security ]
 		},
-		Medic_Researcher:{ // For collecting dead colonist
-			Skills:[ {Doctor:10},Janitor,Research,Chemistry,Programming ],
-			Perks:[ Germaphobe,Morbid_Curiosity,Imsoniac ],
-			Loves:[ Cleaning,Doctor,Research,Chemistry ],
+		Scientist:{
+			Skills:[ {Doctor:10},Janitor,Chemistry,Programming,Research ],
+			Perks:[ Germaphobe,Morbid_Curiosity ],
+			Loves:[ Cleaning,Doctor,Chemistry,Research ],
 			Refuse:![ Harvest.Xeno,Carry.Corpse ],
-			FreeTime:[ Intellectual ],
 			Break:[ Violent_Outburst,Maniac ],
+			FreeTime:[ Intellectual ],
 		},
 		Miner_Engineer_Farmer:{
 			Skills:[ Mining,Engineer,Botanist,Programming ],
@@ -71,14 +71,18 @@ Combo={ // Begining
 			Loves:[ Carry.Corpse,Carry.Items,Cooking,Power.Generation,Scavenge,Security, ],
 			FreeTime:[ Athletic ],
 		},
+		Goolerium_Pooper:{
+			Perks:[ Pacifist,Gluttonous ],
+			FreeTime:[ Spiritual ],
+		},
 	},
 	Opt:{
 		Doctor:{
 			Skills:[ {Doctor:+10},Janitor,Chemistry ],
 			Perks:[ Germaphobe,Morbid_Curiosity ],
 			Loves:[ Cleaning,Doctor,Chemistry ],
-			Hates:![ Research ],
-			Refuse:![ Carry.Corpse ],
+			Hates:[ !Research ],
+			Refuse:[ !Carry.Corpse ],
 			FreeTime:[ Intellectual ],
 		},
 		Miner:{
@@ -88,10 +92,10 @@ Combo={ // Begining
 		},
 		Guard_Carrier:{
 			Skills:[ Health,Speed,Strength ],
-			Perks:![ Pacifist ],
+			Perks:[ !Pacifist ],
 			Loves:[ Scavenge,Carry,Power.Generation ],
-			Hates:![ Security ],
-			Refuse:![ Security ],
+			Hates:[ !Security ],
+			Refuse:[ !Security ],
 			FreeTime:[ Athletic ],
 		},
 		Carrier:{
@@ -107,12 +111,12 @@ Combo={ // Begining
 		},
 		Hunter:{
 			Skills:[ Health,Strength ],
-			Perks:![ Pacifist ],
+			Perks:[ !Pacifist ],
 			Loves:[ Explore,Security ],
 			FreeTime:[ Athletic ],
 		},
 	},
-	Min:{
+	Min:{ // Starter Best
 		Researcher:{
 			Skills:[ {Doctor:+10} ],
 			Perks:[ Imsoniac ],
@@ -125,14 +129,14 @@ Combo={ // Begining
 			Jobs:[ Mining,Pilot,Engineer,Farming,Carry,Engineer,Farming ]
 		},
 		Carrier:{
-			Perks:![ Pacifist ],
+			Perks:[ Speedy,!Pacifist ],
 			Refuse:![ Carry,Security,Explore ],
 			FreeTime:[ Athletic ],
 			Jobs:[ Carry,Power.Generation,Security,Explore ],
 		},
-		Doctor:{
+		Doctor:{ // For collecting dead colonist
 			Perks:[ Morbid_Curiosity ],
-			Refuse:![ Carry.Corpse ],
+			Refuse:[ !Carry.Corpse ],
 			Jobs:[ Carry.Corpse ],
 		},
 	},
