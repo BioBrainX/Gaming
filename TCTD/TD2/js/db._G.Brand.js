@@ -1,4 +1,11 @@
-﻿_.assignIn(TDdb._G.Brand, { /* Gears
+﻿_.assignIn(TDdb._G.Brand, (()=> {
+
+const þ=TDdb,
+_A=þ._A, // Atrributes
+_T=þ._T; // Talents
+
+return {
+	/* Gears
 	brand_name:[
 		0: * default attibutes {
 			gear slot for custom properties: {
@@ -25,4 +32,24 @@
 		{ HIC:0.2 },
 		{ PHZ:0.3 },
 	],
-})
+	ProvD:[
+		{
+			b:{
+				úniq:{
+                    name:'The Gift',
+                    _T:_T.Vigil,
+                },
+			},
+			v:{
+				úniq:{
+                    name:'The Sacrifice',
+                    _T:_T.GlsCann,
+                },
+			}
+		},
+		{ DHS:0.15 },
+		{ CHC:0.1 },
+		{ DCH:0.15 },
+	],
+}
+})())

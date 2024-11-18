@@ -3,7 +3,7 @@ const unknown=0,
 Crafting={
 	Any:{
 		Supply_Station:{
-			Medkit_Small::[{Goolerium:1},[1,+1],,120],
+			Medkit_Small:[{Goolerium:1},[1,+1],,120],
 			Fuel:[{Goolerium:1,Biomass:1},[1,+1],,60],
 			Moonshine:[{Goolerium:1,Biomass:1},[1,+1],,60],
 			Water_Clean:[{Water_Dirty:1},[1,+1],,60],

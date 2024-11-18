@@ -16,6 +16,7 @@ en: {
 	DSG: `Shotgun Damage`,
 	DSM: `SMG Damage`,
 	DTA: `Damage to Armor`,
+	DTE: `Damage to Elites`,
 	DWP: `Weapon Damage`,
 	WRF: `Rate of Fire`,
 	// Defensives
@@ -50,6 +51,9 @@ en: {
 	WRL: `Reload Speed`,
 	WSB: `Stability`,
 	WSW: `Swap Speed`,
+	// Talents
+	GlsCann: `Glass Cannon`,
+	Vigil: `Vigilance`,
 },
 fr: {
 	_display: `Français`,

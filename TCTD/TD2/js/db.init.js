@@ -32,14 +32,14 @@ _S= 0b10000,
 //Skills slot ID
 _S_all= _S|_1st|_2nd,
 
-slots= {
+slots={
 	_G:[ 'm','b','v','g','h','k' ],
 	_W:[ '_W1','_W2','_W3','_WU' ],
 	_S:[ '_S1','_S2','_S3' ],
 },
 
-TDdb= { // main dBase
-_A: {
+TDdb={ // main dBase
+_A:{
 	list:
 		// Offensives
 		`CHC,DAR,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
@@ -48,7 +48,7 @@ _A: {
 		// Utility
 		`SFX,SKD,SKH,SKN,SKR,SKT,WAC,WAM,WHL,WMS,WOR,WRL,WSB,WSW`,
 },
-SHD: {
+SHD:{
 	// Offensive
 	CHC:0.1,
 	DCH:0.2,
@@ -71,10 +71,8 @@ SHD: {
 	WSB:0.1,
 },
 
-_G: {
-	// Gears
-	_A: {
-		// Attributes
+_G:{ // Gears
+	_A:{ // Attributes
 		[_O|_cor]:{ DWP:0.15 },
 		[_O|_mñr]:{ CHC:0.06,DCH:0.12,DHS:0.1,WHL:0.08 },
 		[_D|_cor]:{ ARM:1.7e5 },
@@ -83,7 +81,7 @@ _G: {
 		[_U|_mñr]:{ SKD:0.1,SKH:0.12,SKR:0.2,SFX:0.1 },
 	},
 
-	_M: {
+	_M:{ // Mods
 		[_O]:{ CHC:0.06,DCH:0.12,DHS:0.1 },
 		[_D]:{
 			AOK:18935,
@@ -101,70 +99,74 @@ _G: {
 		slots:[_G|m|b|v],
 	},
 
+	_T:{}, // Talents
+
 	_dfult:[ // default set
 		{
 			avail:_G_all,
 			_A:[ _cor,_mñr,_mñr ],
-			mod:1,
-			m: {
+			_M:1,
+			m:{
 				name:'mask',
 				_A:[ _cor,_mñr,_mñr ],
-				mod:1,
-				_Talent:ø,
-				úniq: {
-					name1: {
+				_M:1,
+				_T:ø,
+				úniq:{
+					name1:{
 						_A:[ _cor,_mñr,_mñr ],
-						mod:1,
-						_Talent:ø,
+						_M:1,
+						_T:ø,
 					},
 				},
 			},
-			b: {
+			b:{
 				name:'backpack',
-				_Talent:_G|_ODU,
+				_T:[ _G|_ODU ],
 			},
-			v: {
+			v:{
 				name:'vest',
-				_Talent:_G|_ODU,
+				_T:[ _G|_ODU ],
 			},
-			g: {
+			g:{
 				name:'gloves',
-				mod:0,
+				_M:0,
 			},
-			h: {
+			h:{
 				name:'holster',
-				mod:0,
+				_M:0,
 			},
-			k: {
+			k:{
 				name:'kneepad',
-				mod:0,
+				_M:0,
 			},
 		}, //set bonuses, {attr1:v},{attr2:v},{attr3:v}
 	],
 
-	Brand: {},
-	Green: {
+	Brand:{},
+	Green:{
 		_dfult: [
 			{
-				b: {
+				b:{
 					name:'backpack',
-					_Talent:ƒø,
+					_A:ø,
+					_T:ƒø,
 				},
-				v: {
+				v:{
 					name:'vest',
-					_Talent:ƒø,
+					_A:ø,
+					_T:ƒø,
 				},
 			},
 		],
 	},
-	Xotc: {},
+	Xotc:{},
 },
 
-_W: {
+_W:{
 	// Weapons
-	_A: {
+	_A:{
 		// Attributes
-		[_O]: {
+		[_O]:{
 			[_cor]:{ DWP:0.15 },
 			[_mjr]:{
 				CHC:0.21,
@@ -182,7 +184,7 @@ _W: {
 				WRF:0.05,
 			},
 		},
-		[_U]: {
+		[_U]:{
 			[_mñr]:{
 				WAC:0.12,
 				WMS:0.125,
