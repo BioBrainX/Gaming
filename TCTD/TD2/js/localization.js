@@ -18,6 +18,8 @@ en: {
 	DTA: `Damage to Armor`,
 	DTE: `Damage to Elites`,
 	DWP: `Weapon Damage`,
+	DBW: `Base Weapon Damage`,
+	DTW: `Total Weapon Damage`,
 	WRF: `Rate of Fire`,
 	// Defensives
 	ARG: `Armour Regeneration`,
@@ -55,8 +57,14 @@ en: {
 	// Talents
 	GlsCann: `Glass Cannon`,
 	Vigil: `Vigilance`,
-	// Guns/Weapons
+	// Guns / Weapons
 	WAR: `Assault Rifle`,
+	WSM: `Submachine Gun`,
+	WLM: `Light Machine Gun`,
+    WRF: `Rifle`,
+    WMR: `Marksman Rifle`,
+    WSG: `Shotgun`,
+	WSA: `Sidearm`,
 },
 fr: {
 	_display: `Français`,

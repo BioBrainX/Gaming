@@ -1,4 +1,4 @@
-﻿(()=>{
+﻿(()=> {
 const þ=TDdb,
 	_P=þ.Players;
 

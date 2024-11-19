@@ -1,6 +1,4 @@
-﻿'use strict';
-
-clogt('TDdb')
+﻿clogt('TDdb')
 
 const // Categories IDs
 _O= 0b001, // Offense
