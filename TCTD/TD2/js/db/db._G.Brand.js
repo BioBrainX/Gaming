@@ -1,10 +1,9 @@
-﻿_.assignIn(TDdb._G.Brand, (()=> {
-
+﻿(()=> {
 const þ=TDdb,
 _A=þ._A, // Atrributes
-_T=þ._T; // Talents
+_T=þ._G._T; // Talents
 
-return {
+_.assignIn(þ._G.Brand,{
 	/* Gears
 	brand_name:[
 		0: * default attibutes {
@@ -51,5 +50,5 @@ return {
 		{ CHC:0.1 },
 		{ DCH:0.15 },
 	],
-}
-})())
+})
+})()

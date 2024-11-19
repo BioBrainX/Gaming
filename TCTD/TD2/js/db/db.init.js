@@ -1,8 +1,10 @@
-﻿clogt('TDdb')
+﻿'use strict';
+
+clogt('TDdb')
 
 const // Categories IDs
-_O= 0b001, // Offensive
-_D= 0b010, // Defensive
+_O= 0b001, // Offense
+_D= 0b010, // Defense
 _U= 0b100, // Utility
 _ODU= _O|_D|_U, // All Categories
 
@@ -33,9 +35,9 @@ _S= 0b10000,
 _S_all= _S|_1st|_2nd,
 
 slots={
-	_G:[ 'm','b','v','g','h','k' ],
-	_W:[ '_W1','_W2','_W3','_WU' ],
-	_S:[ '_S1','_S2','_S3' ],
+	_G:`m,b,v,g,h,k`,
+	_W:'_W1,_W2,_W3,_WU',
+	_S:'_S1,_S2,_S3',
 },
 
 TDdb={ // main dBase
@@ -201,7 +203,12 @@ Players:[,,,], // 4 Players
 _ITM:{}, // will contained all items
 };
 
-(_=>{ //initialize Players Attributes
+(()=> { //init slots
+	for (let i in slots)
+		slots[i]= slots[i].split(",");
+})();
+
+(()=> { //initialize Players Attributes
 	const þ=TDdb, plyr=þ.Players,
 		_A=þ._A.list.split(',');
 	ƒor([0,4],p=>{
@@ -209,4 +216,10 @@ _ITM:{}, // will contained all items
 		for(let i in _A)
 			plyr[p]._A[_A[i]]= 0;
 	})
+})();
+
+/* 
+(()=>{
+	
 })()
+ */
