@@ -99,7 +99,13 @@ _G:{ // Gears
 		slots:[_G|m|b|v],
 	},
 
-	_T:{}, // Talents
+	_T:{ // Talents
+		_dfult:{
+			onEqp:ƒø,
+			onActv:ƒø,
+			onUnEqp:ƒø,
+		}
+	},
 
 	_dfult:[ // default set
 		{
