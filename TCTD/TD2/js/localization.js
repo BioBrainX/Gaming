@@ -51,9 +51,12 @@ en: {
 	WRL: `Reload Speed`,
 	WSB: `Stability`,
 	WSW: `Swap Speed`,
+	//Gears
 	// Talents
 	GlsCann: `Glass Cannon`,
 	Vigil: `Vigilance`,
+	// Guns/Weapons
+	WAR: `Assault Rifle`,
 },
 fr: {
 	_display: `Français`,
