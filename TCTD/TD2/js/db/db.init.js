@@ -45,7 +45,7 @@ TDdb={ // main dBase
 _A:{
 	list:
 		// Offensives
-		`CHC,DAR,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
+		`CHC,DAR,DBM,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
 		// Defensives
 		`ARG,ARM,HIC,HPP,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,` +
 		// Utility
@@ -202,7 +202,14 @@ _W:{
 	},
 },
 
-Players:[,,,], // 4 Players
+Players:{
+	p:[], // 8 Players
+	cap:{ // max capped attributes
+		CHC:.6,
+		_P:8,
+	},
+},
+
 _ITM:{}, // will contained all items
 };
 
@@ -211,27 +218,51 @@ _ITM:{}, // will contained all items
 		slots[i]= slots[i].split(",");
 })();
 
-(()=> { //initialize Players Attributes & functions
+(()=> { // setup Players Attributes & functions
 	const þ=TDdb, _P=þ.Players,
-		_A=þ._A.list.split(','),
-		_ƒP={
+		_Pp=_P.p, _cap=_P.cap;
+
+	const _A= þ._A.list.split(',');
+	ƒor(_cap._P, p=>{
+		_Pp.push({_A:{}});
+		const _Pi=_Pp[p];
+		for(let i in _A)
+			_Pi._A[_A[i]]= 0;
+		// Custom adjustments
+		_Pi._A.DBM=[0,0,0,0,0,0];
+	})
+
+	þ.Players.ƒ= (function(){
+		const _ƒA=pId=>_Pp[pId]._A;
+		return {
+
 			inc:{ // increase attributes functions
-				TtlDmg:(thisRef,v)=>thisRef._A.x+=v,
+				CHC:(pId,v)=> {
+					const _A=_ƒA(pId)
+					_A.CHC+=v
+					return _P.ƒ.inc
+				},
+				DBM:(pId,i,v)=>{
+					_ƒA(pId).DBM[i]+=v
+					return _P.ƒ.inc
+				},
+				// tst:(_)=>clog(_Pp),
 			},
 			dec:{ // decrease attributes functions
-				TtlDmg:(thisRef,v)=>thisRef._A.x-=v,
+				CHC:(pId,v)=> {
+					const _A=_ƒA(pId)
+					_A.CHC-=v
+					return _P.ƒ.dec
+				},
+				DBM:(pId,i,v)=>{
+					_ƒA(pId).DBM[i]-=v
+					return _P.ƒ.dec
+				},
+				// tst:(_)=>clog(_Pp),
 			},
-		};
-	ƒor([0,4],p=>{
-		const _Pp=_P[p];
-		_Pp= {_A:{}};
-		for(let i in _A)
-			_Pp._A[_A[i]]= 0;
-
-		for(let i in _ƒP)
-		for(let j in _ƒP[i])
-			_Pp[i][j]=_ƒP[i][j].bind(_Pp);
-	})
+		}
+	})();
+	clog(þ.Players)
 })();
 
 /* 

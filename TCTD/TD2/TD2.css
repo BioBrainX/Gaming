@@ -52,7 +52,7 @@ head,.hide
 body {
 	background-color : #252830;
 	background		 : linear-gradient(var(--Black67), var(--Black67)), url('bg.webp');
-	background-size  : cover;
+	/* background-size  : cover; */
 }
 
 ul {

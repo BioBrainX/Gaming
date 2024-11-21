@@ -5,6 +5,7 @@ en: {
 	// Offensives
 	CHC: `Critical Hit Chance`,
 	DAR: `AR Damage`,
+	DBM: `Total Weapon Damage Bonus Multiplier`,
 	DCH: `Critical Hit Damage`,
 	DHL: `Health Damage`,
 	DHS: `HeadShot Damage`,
@@ -19,7 +20,7 @@ en: {
 	DTE: `Damage to Elites`,
 	DWP: `Weapon Damage`,
 	DBW: `Base Weapon Damage`,
-	DTW: `Total Weapon Damage`,
+	DBA: `Total Weapon Damage Bonus Additively`,
 	WRF: `Rate of Fire`,
 	// Defensives
 	ARG: `Armour Regeneration`,
@@ -74,4 +75,5 @@ fr: {
 es: {
 	_display: `Español`,
 },
+_dfult:`en`,
 };

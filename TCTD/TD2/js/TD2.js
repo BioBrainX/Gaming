@@ -2,7 +2,7 @@
 clogt('TD2')
 
 
-function Player(pId=0) {
+function _P(pId=0) {
 	const
 	þ=TDdb,
 	_ITM=þ._ITM,
