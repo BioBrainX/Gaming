@@ -23,6 +23,9 @@
 		{
 			"name": "Tst-Nodejs",
 			"path": "../Tst-Nodejs"
+		},
+		{
+			"path": "../core-keeper-save-editor"
 		}
 	]
 }
