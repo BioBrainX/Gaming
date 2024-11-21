@@ -20,35 +20,88 @@ _.assignIn(þ._G.Brand,{
 	] */
 	511: [
 		{
+			_A: {_D:[_cor|_D]},
 			g: {
 				úniq: {
 					name: 'Deathgrips',
-					_A: [,{ AOK:0.15 }],
+					_A: {_fxd:[,{ AOK:0.15 }]},
 				},
 			},
 		},
-		{ HLT:0.1 },
+		{ HPP:0.1 },
 		{ HIC:0.2 },
 		{ PHZ:0.3 },
 	],
 	ProvD:[
 		{
+			_A:{_D:[ _cor|_O ]},
 			b:{
 				úniq:{
-                    name:'The Gift',
-                    _T:_T.Vigil,
-                },
+					name:'The Gift',
+					_T:_T.Vigil,
+				},
 			},
 			v:{
 				úniq:{
-                    name:'The Sacrifice',
-                    _T:_T.GlsCann,
-                },
+					name:'The Sacrifice',
+					_T:_T.GlsCann,
+				},
 			}
 		},
 		{ DHS:0.15 },
 		{ CHC:0.1 },
 		{ DCH:0.15 },
+	],
+	Česká:[
+		{
+			_A:{_D:[ _cor|_O ]},
+			b:{
+				úniq:{
+					name:`Devil's Due`,
+					_T:_T.Clutch,
+				},
+			},
+		},
+		{ CHC:0.1 },
+		{ PHZ:0.2 },
+		{ HPP:0.1 },
+	],
+	Grupo:[
+		{
+			_A:{_D:[ _cor|_O ]},
+			v:{
+				úniq:{
+					name:`Door-Kicker's Knock`,
+					_T:_T.Spark,
+				},
+			},
+		},
+		{ DHC:0.15 },
+		{ DEX:0.15 },
+		{ DHS:0.15 },
+	],
+	Brazos:[
+		{
+			_A:{_D:[ _cor|_D ]},
+			b:{
+				úniq:{
+					name:`Hermano `,
+					_T:_T.OvrClok,
+				},
+			},
+			h:{
+				úniq:{
+					name:`Picaro's Holster`,
+					_A:{
+						_R:[ _cor|_DU ],
+						_fxd:[,{ WPD:0.15 }],
+					},
+				},
+			},
+		},
+		{ DHC:0.15 },
+		{ DEX:0.15 },
+		{ DHS:0.15 },
 	],
 })
 })()

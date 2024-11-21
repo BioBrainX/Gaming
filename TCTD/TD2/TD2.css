@@ -1,62 +1,62 @@
 ﻿/* -=-=-=-=-=-=| BASIC STYLE |=-=-=-=-=-=- */
 :root{
-    --cø:#0000;
-    --TD-Std	  : #78c932;		--TD-Std40		: #78c93266;		--TD-Std67		: #78c932aa;
-    --TD-Spc	  : #5080ff;		--TD-Spc40		: #5080ff66;		--TD-Spc67		: #5080ffaa;
-    --TD-Spr	  : #af4296;		--TD-Spr40		: #af429666;		--TD-Spr67		: #af4296aa;
-    --TD-HiN	  : #ffaf10;		--TD-HiN20		: #ffaf1033;		--TD-HiN30		: #ffaf104c;
+	--cø:#0000;
+	--TD-Std	  : #78c932;		--TD-Std40		: #78c93266;		--TD-Std67		: #78c932aa;
+	--TD-Spc	  : #5080ff;		--TD-Spc40		: #5080ff66;		--TD-Spc67		: #5080ffaa;
+	--TD-Spr	  : #af4296;		--TD-Spr40		: #af429666;		--TD-Spr67		: #af4296aa;
+	--TD-HiN	  : #ffaf10;		--TD-HiN20		: #ffaf1033;		--TD-HiN30		: #ffaf104c;
 									 --TD-HiN40		 : #ffaf1066;		 --TD-HiN67		 : #ffaf10aa;
-    --TD-Xot	  : #ff6337;		--TD-Xot20		: #ff633733;		--TD-Xot30		: #ff63374c;
+	--TD-Xot	  : #ff6337;		--TD-Xot20		: #ff633733;		--TD-Xot30		: #ff63374c;
 									 --TD-Xot40		 : #ff633766;		 --TD-Xot67		 : #ff6337aa;
-    --TD-Set      : #01ff90;		--TD-Set20		: #01ff9033;		--TD-Set30		: #01ff904c;
-                                	 --TD-Set40		 : #01ff9066;		 --TD-Set67		 : #01ff90aa;
-    --TD-Orange   : #ff7f00;		--TD-Orange20	: #ff7f0033;		--TD-Orange30	: #ff7f004c;
+	--TD-Set      : #01ff90;		--TD-Set20		: #01ff9033;		--TD-Set30		: #01ff904c;
+									 --TD-Set40		 : #01ff9066;		 --TD-Set67		 : #01ff90aa;
+	--TD-Orange   : #ff7f00;		--TD-Orange20	: #ff7f0033;		--TD-Orange30	: #ff7f004c;
 									 --TD-Orange40	 : #ff7f0066;		 --TD-Orange67	 : #ff7f00aa;
-    --TD-Orange2  : #fd6b0d;		--TD-Orange240	: #fd6b0d66;		--TD-Orange267	: #fd6b0daa;
-    --TD-Select   : #ff8a13;		--TD-Select40   : #ff8a1366;		--TD-Select67	: #ff8a13aa;
-    --TD-Off	  : #fe6262;		--TD-Off40		: #fe626266;		--TD-Off67		: #fe6262aa;
-    --TD-Def	  : #73b8fe;		--TD-Def40		: #73b8fe66;		--TD-Def67		: #73b8feaa;
-    --TD-Uti	  : #fcd173;		--TD-Uti40		: #fcd17366;		--TD-Uti67		: #fcd173aa;
-    --TD-Hostile  : #ff3000;		--TD-Hostile40	: #ff300066;		--TD-Hostile67	: #ff3000aa;
-    --TD-Heal     : #8cc83c;		--TD-Heal40		: #8cc83c66;		--TD-Heal67		: #8cc83caa;
-    --TD-Teal     : #47e6dc;		--TD-Teal40		: #47e6dc66;		--TD-Teal67		: #47e6dcaa;
-    --TD-LiteGrey : #a6a6a6;		--TD-LiteGrey90	: #a6a6a6e6;
-    --TD-Grey     : #666666;		--TD-Grey90		: #666666e6;
-    --TD-DarkGrey : #242424;		--TD-DarkGrey90	: #242424e6;		--TD-DarkGrey67 : #242424aa;
-									 --Black90		 : #000000e6;		 --Black67       : #000000aa;
-    --TD-HiN-Invrt: #0050ef;		--TD-HiN20-Invrt: #0050ef33;		--TD-HiN30-Invrt: #0050ef4c;
+	--TD-Orange2  : #fd6b0d;		--TD-Orange240	: #fd6b0d66;		--TD-Orange267	: #fd6b0daa;
+	--TD-Select   : #ff8a13;		--TD-Select40	: #ff8a1366;		--TD-Select67	: #ff8a13aa;
+	--TD-Off	  : #fe6262;		--TD-Off40		: #fe626266;		--TD-Off67		: #fe6262aa;
+	--TD-Def	  : #73b8fe;		--TD-Def40		: #73b8fe66;		--TD-Def67		: #73b8feaa;
+	--TD-Uti	  : #fcd173;		--TD-Uti40		: #fcd17366;		--TD-Uti67		: #fcd173aa;
+	--TD-Hostile  : #ff3000;		--TD-Hostile40	: #ff300066;		--TD-Hostile67	: #ff3000aa;
+	--TD-Heal     : #8cc83c;		--TD-Heal40		: #8cc83c66;		--TD-Heal67		: #8cc83caa;
+	--TD-Teal     : #47e6dc;		--TD-Teal40		: #47e6dc66;		--TD-Teal67		: #47e6dcaa;
+	--TD-LiteGrey : #a6a6a6;		--TD-LiteGrey90	: #a6a6a6e6;
+	--TD-Grey     : #666666;		--TD-Grey90		: #666666e6;
+	--TD-DarkGrey : #242424;		--TD-DarkGrey90	: #242424e6;		--TD-DarkGrey67 : #242424aa;
+									 --Black90		 : #000000e6;		 --Black67		 : #000000aa;
+	--TD-HiN-Invrt: #0050ef;		--TD-HiN20-Invrt: #0050ef33;		--TD-HiN30-Invrt: #0050ef4c;
 									 --TD-HiN40-Invrt: #0050ef66;		 --TD-HiN67-Invrt: #0050efaa;
-    --TD-Xot-Invrt: #009cc8;		--TD-Xot20-Invrt: #009cc833;		--TD-Xot30-Invrt: #009cc84c;
-                              		 --TD-Xot40-Invrt: #009cc866;		 --TD-Xot67-Invrt: #009cc8aa;
-    --TD-Set-Invrt: #fe006f;		--TD-Set20-Invrt: #fe006f33;		--TD-Set30-Invrt: #fe006f4c;
+	--TD-Xot-Invrt: #009cc8;		--TD-Xot20-Invrt: #009cc833;		--TD-Xot30-Invrt: #009cc84c;
+									 --TD-Xot40-Invrt: #009cc866;		 --TD-Xot67-Invrt: #009cc8aa;
+	--TD-Set-Invrt: #fe006f;		--TD-Set20-Invrt: #fe006f33;		--TD-Set30-Invrt: #fe006f4c;
 									 --TD-Set40-Invrt: #fe006f66;		 --TD-Set67-Invrt: #fe006faa;
-    --Ico-sz : 128;
-    --Mod-sz : 16px;
-    --stat-w : 300px;
+	--Ico-sz : 128;
+	--Mod-sz : 16px;
+	--stat-w : 300px;
 }
 
 * { display: inline-block;
-                    font-family : 'Borda 12',Titillium,'Arial Narrow';
-                    text-shadow : 3px 2px 0 #464646;
-                    color       : rgb(244,255,255);
-                    background-repeat: no-repeat; }
-h1,h2,h3,h4,h5,h6 { font-family : 'Borda 9' }
-strong,b,b * {      font-family : 'Borda 5' }
-i {                 font-family : 'Borda 7' }
-b i, i b {          font-family : 'Borda 6' }
+					font-family : 'Borda 12',Titillium,'Arial Narrow';
+					text-shadow : 3px 2px 0 #464646;
+					color		: rgb(244,255,255);
+					background-repeat: no-repeat; }
+h1,h2,h3,h4,h5,h6 {	font-family : 'Borda 9' }
+strong,b,b * {		font-family : 'Borda 5' }
+i {					font-family : 'Borda 7' }
+b i, i b {			font-family : 'Borda 6' }
 p { margin:0 }
 
 head,.hide
-    { display: none !important }
+	{ display: none !important }
 
 body {
-    background-color : #252830;
-    background       : linear-gradient(var(--Black67), var(--Black67)), url('bg.webp');
-    background-size  : cover;
+	background-color : #252830;
+	background		 : linear-gradient(var(--Black67), var(--Black67)), url('bg.webp');
+	background-size  : cover;
 }
 
 ul {
-    margin  : 0;
-    padding : 0;
+	margin	: 0;
+	padding : 0;
 }
 

@@ -4,6 +4,9 @@ const // Categories IDs
 _O= 0b001, // Offense
 _D= 0b010, // Defense
 _U= 0b100, // Utility
+_OD= _O|_D, // Offense & Defense
+_OU= _O|_U, // Offense & Utility
+_DU= _D|_U, // Defense & Utility
 _ODU= _O|_D|_U, // All Categories
 
 _cor= 0b11000, // Core
@@ -44,7 +47,7 @@ _A:{
 		// Offensives
 		`CHC,DAR,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
 		// Defensives
-		`ARG,ARM,HIC,HLT,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,` +
+		`ARG,ARM,HIC,HPP,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,` +
 		// Utility
 		`SFX,SKD,SKH,SKN,SKR,SKT,WAC,WAM,WHL,WMS,WOR,WRL,WSB,WSW`,
 },
@@ -56,7 +59,7 @@ SHD:{
 	DWP:0.1,
 	// Defensive
 	ARM:0.1,
-	HLT:0.1,
+	HPP:0.1,
 	PHZ:0.1,
 	RXP:0.1,
 	// Utility
@@ -76,7 +79,7 @@ _G:{ // Gears
 		[_O|_cor]:{ DWP:0.15 },
 		[_O|_mñr]:{ CHC:0.06,DCH:0.12,DHS:0.1,WHL:0.08 },
 		[_D|_cor]:{ ARM:1.7e5 },
-		[_D|_mñr]:{ ARG:4925,RXP:0.1,PHZ:0.1,HLT:18935 },
+		[_D|_mñr]:{ ARG:4925,RXP:0.1,PHZ:0.1,HPP:18935 },
 		[_U|_cor]:{ SKT:1 },
 		[_U|_mñr]:{ SKD:0.1,SKH:0.12,SKR:0.2,SFX:0.1 },
 	},
@@ -110,24 +113,20 @@ _G:{ // Gears
 	_dfult:[ // default set
 		{
 			avail:_G_all,
-			_A:[ _cor,_mñr,_mñr ],
-			_M:1,
+			_A:{
+				// _D:[ _cor|_ODU ], // Designated Roll in slot[0]=core, [1,2]=minor
+				_R:[ _cor|_ODU,_mñr|_ODU,_mñr|_ODU ], // Possible roll
+				// _fxd:[], // fixed roll
+			},
+			_M:[ _ODU ], // Accepted mod type in slot
+			_T:ø,
 			m:{
 				name:'mask',
-				_A:[ _cor,_mñr,_mñr ],
-				_M:1,
-				_T:ø,
-				úniq:{
-					name1:{
-						_A:[ _cor,_mñr,_mñr ],
-						_M:1,
-						_T:ø,
-					},
-				},
+				_M:ø,
 			},
 			b:{
 				name:'backpack',
-				_T:[ _G|_ODU ],
+				_T:[ _G|_ODU ], // Possible roll type
 			},
 			v:{
 				name:'vest',
@@ -135,15 +134,15 @@ _G:{ // Gears
 			},
 			g:{
 				name:'gloves',
-				_M:0,
+				_M:ø,
 			},
 			h:{
 				name:'holster',
-				_M:0,
+				_M:ø,
 			},
 			k:{
 				name:'kneepad',
-				_M:0,
+				_M:ø,
 			},
 		}, //set bonuses, {attr1:v},{attr2:v},{attr3:v}
 	],
@@ -212,13 +211,26 @@ _ITM:{}, // will contained all items
 		slots[i]= slots[i].split(",");
 })();
 
-(()=> { //initialize Players Attributes
-	const þ=TDdb, plyr=þ.Players,
-		_A=þ._A.list.split(',');
+(()=> { //initialize Players Attributes & functions
+	const þ=TDdb, _P=þ.Players,
+		_A=þ._A.list.split(','),
+		_ƒP={
+			inc:{ // increase attributes functions
+				TtlDmg:(thisRef,v)=>thisRef._A.x+=v,
+			},
+			dec:{ // decrease attributes functions
+				TtlDmg:(thisRef,v)=>thisRef._A.x-=v,
+			},
+		};
 	ƒor([0,4],p=>{
-		plyr[p]= {_A:{}};
+		const _Pp=_P[p];
+		_Pp= {_A:{}};
 		for(let i in _A)
-			plyr[p]._A[_A[i]]= 0;
+			_Pp._A[_A[i]]= 0;
+
+		for(let i in _ƒP)
+		for(let j in _ƒP[i])
+			_Pp[i][j]=_ƒP[i][j].bind(_Pp);
 	})
 })();
 

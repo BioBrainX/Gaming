@@ -14,10 +14,14 @@ _.assignIn(TDdb._G._T,{
 	v:{
 		GlcCann:{
 			onEqp:pId=>{ // Glass Canon
-				Player(pId).IncTtlDmg(.3)
+				Player(pId).Inc
+					.TtlDmg(.25)
+					.IncDmg(.5)
 			},
 			onUnEqp:pId=>{
-				Player(pId).DecTtlDmg(.3)
+				Player(pId).Dec
+					.TtlDmg(.25)
+					.IncDmg(.5)
 			},
 		},
 	},
