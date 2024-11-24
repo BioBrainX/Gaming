@@ -68,6 +68,8 @@ en: {
 	DetGrp: `Deathgrips`,
 		// Brazos
 	Picaro: `Picaro's Holster`,
+		// Česká
+	DvilD: `Devil's Due`,
 		// Grupo
 	DorKik: `Door-Kicker's Knock`,
 		// Providence

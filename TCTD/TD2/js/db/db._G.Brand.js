@@ -65,8 +65,7 @@ _.assignIn(þ._G.Brand,{
 			_A:{_D:[ _cor|_O ]},
 			b:{
 				_Û:{
-					name:`Devil's Due`,
-					_T:_T.Clutch,
+					DvilD:{ _T:_T.Clutch }
 				},
 			},
 		},
@@ -105,5 +104,32 @@ _.assignIn(þ._G.Brand,{
 		{ DEX:0.15 },
 		{ DHS:0.15 },
 	],
+	Legatus:[
+		{
+			_A:[ {_D:_cor|_O} ],
+			m:{
+				_Û:{
+					Visionario:{ _A:[,{WOR:.5}] }
+				}
+			}
+		},
+		{ WSW:.3 },
+		{ WOR:.7 },
+		{ DWP:.15 },
+	],
+	Petrov:[
+		{
+			_A:[ {_D:_cor|_O} ],
+			g:{
+				_Û:{
+					Contractor:{ _A:[,{DTA:.08}] }
+				},
+			},
+		},
+		{ DLM:.1 },
+		{ WHL:.15 },
+		{ WAM:.5 },
+	],
+
 })
 })()

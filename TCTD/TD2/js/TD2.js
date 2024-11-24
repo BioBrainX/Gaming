@@ -8,12 +8,12 @@ clogt('TD2')
 	_ITM=þ._ITM,
 	_P=þ.Players, _cap=_P.cap,
 	_Pp=_P.p, _Pi=_Pp[pId] ,_PA=_Pi._A,
+	_PW=_Pi._W,
 
 	ƒ= {
 		CalcTtlOutDmg:()=>{
 			const
-			
-			TtlBaseDmg=_PA.DBW;
+			TtlBaseDmg=ƒor(2,(i,r)=>r.push(_PW[i].DBW*_PW[i].WMS),[]);
 			return {HSD}
 		},
 		Eqp:(itms={},eqp=_T)=> {
