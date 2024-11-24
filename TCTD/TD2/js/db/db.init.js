@@ -42,40 +42,16 @@ slots={
 },
 
 TDdb={ // main dBase
-_A:{
+_A:{ // Attributes
 	list:
 		// Offensives
-		`CHC,DAR,DBM,DCH,DHL,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
+		`CHC,DAR,DBM,DBW,DCH,DHP,DHS,DLM,DMR,DOC,DPT,DRF,DSG,DSM,DTA,DWP,WRF,` +
 		// Defensives
 		`ARG,ARM,HIC,HPP,OKA,OKH,PEL,PHZ,RBL,RBR,RDF,RDO,RDR,RNS,RSC,RXP,` +
 		// Utility
 		`SFX,SKD,SKH,SKN,SKR,SKT,WAC,WAM,WHL,WMS,WOR,WRL,WSB,WSW`,
-},
-SHD:{
-	// Offensive
-	CHC:0.1,
-	DCH:0.2,
-	DHS:0.2,
-	DWP:0.1,
-	// Defensive
-	ARM:0.1,
-	HPP:0.1,
-	PHZ:0.1,
-	RXP:0.1,
-	// Utility
-	SKD:0.1,
-	SKH:0.1,
-	SKN:0.2,
-	SKR:0.1,
-	// Handling
-	WAC:0.1,
-	WAM:0.2,
-	WRL:0.1,
-	WSB:0.1,
-},
 
-_G:{ // Gears
-	_A:{ // Attributes
+	_G:{ // Gears
 		[_O|_cor]:{ DWP:0.15 },
 		[_O|_mñr]:{ CHC:0.06,DCH:0.12,DHS:0.1,WHL:0.08 },
 		[_D|_cor]:{ ARM:1.7e5 },
@@ -83,24 +59,66 @@ _G:{ // Gears
 		[_U|_cor]:{ SKT:1 },
 		[_U|_mñr]:{ SKD:0.1,SKH:0.12,SKR:0.2,SFX:0.1 },
 	},
-
-	_M:{ // Mods
-		[_O]:{ CHC:0.06,DCH:0.12,DHS:0.1 },
-		[_D]:{
-			AOK:18935,
-			ICR:0.2,
-			PFE:0.13,
-			RBL:0.1,
-			RBR:0.1,
-			RDF:0.1,
-			RDO:0.1,
-			RDR:0.1,
-			RNS:0.1,
-			RSC:0.1,
+	_W:{ // Weapons
+		[_cor]:{
+			[_O]:{
+				DWP:0.15
+			}
 		},
-		[_U]:{ SKH:0.12,SKR:0.2,SKN:0.1 },
-		slots:[_G|m|b|v],
+		[_mjr]:{
+			[_O]:{
+				CHC:0.21,
+				DCH:0.17,
+				DHP:0.21,
+				DHS:1.11,
+				DOC:0.1,
+				DTA:0.12,
+			},
+		},
+		[_mñr]:{
+			[_O]:{
+				CHC:0.095,
+				DCH:0.1,
+				DHS:0.1,
+				DOC:0.1,
+				WRF:0.05,
+			},
+			[_U]:{
+				WAC:0.12,
+				WMS:0.125,
+				WOR:0.24,
+				WRL:0.12,
+				WSB:0.12,
+				WSW:0.15,
+			},
+		},
 	},
+	SHD:{
+		// Offensive
+		CHC:0.1,
+		DCH:0.2,
+		DHS:0.2,
+		DWP:0.1,
+		// Defensive
+		ARM:0.1,
+		HPP:0.1,
+		PHZ:0.1,
+		RXP:0.1,
+		// Utility
+		SKD:0.1,
+		SKH:0.1,
+		SKN:0.2,
+		SKR:0.1,
+		// Handling
+		WAC:0.1,
+		WAM:0.2,
+		WRL:0.1,
+		WSB:0.1,
+	},
+},
+
+_G:{ // Gears
+	_M:{}, // Mods
 
 	_T:{ // Talents
 		_dfult:{
@@ -113,12 +131,17 @@ _G:{ // Gears
 	_dfult:[ // default set
 		{
 			avail:_G_all,
-			_A:{
-				// _D:[ _cor|_ODU ], // Designated Roll in slot[0]=core, [1,2]=minor
-				_R:[ _cor|_ODU,_mñr|_ODU,_mñr|_ODU ], // Possible roll
-				// _fxd:[], // fixed roll
-			},
-			_M:[ _ODU ], // Accepted mod type in slot
+			_A:[
+				{ // Core slot
+					_D:_cor|_ODU, // Designated roll
+					_R:_cor|_ODU, // Possible roll
+					// _F:ø, // Fixed roll
+				},
+				// minor slots
+				{ _R:_mñr|_ODU }, // Possible roll
+				{ _R:_mñr|_ODU }, // Possible roll
+			],
+			_M:[ _ODU ], // Acceptable mod type in slot
 			_T:ø,
 			m:{
 				name:'mask',
@@ -126,7 +149,7 @@ _G:{ // Gears
 			},
 			b:{
 				name:'backpack',
-				_T:[ _G|_ODU ], // Possible roll type
+				_T:[ _G|_ODU ], // Possible roll
 			},
 			v:{
 				name:'vest',
@@ -152,12 +175,10 @@ _G:{ // Gears
 		_dfult: [
 			{
 				b:{
-					name:'backpack',
 					_A:ø,
 					_T:ƒø,
 				},
 				v:{
-					name:'vest',
 					_A:ø,
 					_T:ƒø,
 				},
@@ -167,40 +188,7 @@ _G:{ // Gears
 	Xotc:{},
 },
 
-_W:{
-	// Weapons
-	_A:{
-		// Attributes
-		[_O]:{
-			[_cor]:{ DWP:0.15 },
-			[_mjr]:{
-				CHC:0.21,
-				DCH:0.17,
-				DHL:0.21,
-				DHS:1.11,
-				DOC:0.1,
-				DTA:0.12,
-			},
-			[_mñr]:{
-				CHC:0.095,
-				DCH:0.1,
-				DHS:0.1,
-				DOC:0.1,
-				WRF:0.05,
-			},
-		},
-		[_U]:{
-			[_mñr]:{
-				WAC:0.12,
-				WMS:0.125,
-				WOR:0.24,
-				WRL:0.12,
-				WSB:0.12,
-				WSW:0.15,
-			},
-		},
-	},
-},
+_W:{}, // Weapons
 
 Players:{
 	p:[], // 8 Players
@@ -210,15 +198,17 @@ Players:{
 	},
 },
 
-_ITM:{}, // will contained all items
+_ITM:{}, // will contained all items with its name as the key
 };
 
-(()=> { //init slots
+
+(()=> {
+	// init slots
 	for (let i in slots)
 		slots[i]= slots[i].split(",");
-})();
 
-(()=> { // setup Players Attributes & functions
+
+	// init Players Attributes
 	const þ=TDdb, _P=þ.Players,
 		_Pp=_P.p, _cap=_P.cap;
 
@@ -231,42 +221,5 @@ _ITM:{}, // will contained all items
 		// Custom adjustments
 		_Pi._A.DBM=[0,0,0,0,0,0];
 	})
-
-	þ.Players.ƒ= (function(){
-		const _ƒA=pId=>_Pp[pId]._A;
-		return {
-
-			inc:{ // increase attributes functions
-				CHC:(pId,v)=> {
-					const _A=_ƒA(pId)
-					_A.CHC+=v
-					return _P.ƒ.inc
-				},
-				DBM:(pId,i,v)=>{
-					_ƒA(pId).DBM[i]+=v
-					return _P.ƒ.inc
-				},
-				// tst:(_)=>clog(_Pp),
-			},
-			dec:{ // decrease attributes functions
-				CHC:(pId,v)=> {
-					const _A=_ƒA(pId)
-					_A.CHC-=v
-					return _P.ƒ.dec
-				},
-				DBM:(pId,i,v)=>{
-					_ƒA(pId).DBM[i]-=v
-					return _P.ƒ.dec
-				},
-				// tst:(_)=>clog(_Pp),
-			},
-		}
-	})();
-	clog(þ.Players)
 })();
 
-/* 
-(()=>{
-	
-})()
- */

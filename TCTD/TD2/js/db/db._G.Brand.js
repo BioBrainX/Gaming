@@ -6,25 +6,35 @@ _T=þ._G._T; // Talents
 _.assignIn(þ._G.Brand,{
 	/* Gears
 	brand_name:[
-		0: * default attibutes {
+		0.default attibutes:{
 			gear slot for custom properties: {
-				únique gear for this slot:{
-					Attributes(_A):[ core,minor,minor ],
-					Talent(_T):ƒ(),
-				}
+				_Ûnique gear for this slot:{
+					Gear's name:{
+						Attributes(_A):[ core,minor,minor ],
+						Talent(_T):ƒ(),
+					},
+				},
+				mod:slot,
 			}
 		},
 		1st:{ set bonus attribute:val },
 		2nd:{ set bonus attribute:val },
 		3rd:{ set bonus attribute:val },
 	] */
+	Brandless:[
+		{
+			g:{_M:[_ODU]},
+			h:{_M:[_ODU]},
+			k:{_M:[_ODU]},
+		},
+		// Nø set bonus
+	],
 	511: [
 		{
 			_A: {_D:[_cor|_D]},
 			g: {
-				úniq: {
-					name: 'Deathgrips',
-					_A: {_fxd:[,{ AOK:0.15 }]},
+				_Û: {
+					DetGrp:{ _A:[,{ AOK:0.15 }] },
 				},
 			},
 		},
@@ -36,15 +46,13 @@ _.assignIn(þ._G.Brand,{
 		{
 			_A:{_D:[ _cor|_O ]},
 			b:{
-				úniq:{
-					name:'The Gift',
-					_T:_T.Vigil,
+				_Û:{
+					Gift:{ _T:_T.Vigil }
 				},
 			},
 			v:{
-				úniq:{
-					name:'The Sacrifice',
-					_T:_T.GlsCann,
+				_Û:{
+					Sacrfc:{ _T:_T.GlsCann },
 				},
 			}
 		},
@@ -56,46 +64,40 @@ _.assignIn(þ._G.Brand,{
 		{
 			_A:{_D:[ _cor|_O ]},
 			b:{
-				úniq:{
+				_Û:{
 					name:`Devil's Due`,
 					_T:_T.Clutch,
 				},
 			},
 		},
-		{ CHC:0.1 },
+		{ CHC:0.08 },
 		{ PHZ:0.2 },
-		{ HPP:0.1 },
+		{ HPP:0.9 },
 	],
 	Grupo:[
 		{
 			_A:{_D:[ _cor|_O ]},
 			v:{
-				úniq:{
-					name:`Door-Kicker's Knock`,
-					_T:_T.Spark,
+				_Û:{
+					DorKik:{ _T:_T.Spark }
 				},
 			},
 		},
-		{ DHC:0.15 },
-		{ DEX:0.15 },
-		{ DHS:0.15 },
+		{ DHC:0.13 },
+		{ DEX:0.20 },
+		{ DHS:0.13 },
 	],
 	Brazos:[
 		{
-			_A:{_D:[ _cor|_D ]},
+			_A:[ {_D:_cor|_D} ],
 			b:{
-				úniq:{
-					name:`Hermano `,
-					_T:_T.OvrClok,
+				_Û:{
+					Hermano:{ _T:_T.OvrClok }
 				},
 			},
 			h:{
-				úniq:{
-					name:`Picaro's Holster`,
-					_A:{
-						_R:[ _cor|_DU ],
-						_fxd:[,{ WPD:0.15 }],
-					},
+				_Û:{
+					Picaro:{ _A:[ {_R:_cor|_DU},{ WPD:0.15 } ]},
 				},
 			},
 		},

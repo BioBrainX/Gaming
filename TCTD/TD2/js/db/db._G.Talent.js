@@ -1,7 +1,7 @@
 ﻿clogt('_G_Talents');
 (()=> {
 const þ=TDdb,
-	_P=þ.Players;
+	_Pƒ=þ.Players.ƒø;
 
 _.assignIn(TDdb._G._T,{
 	b:{
@@ -14,13 +14,13 @@ _.assignIn(TDdb._G._T,{
 	v:{
 		GlcCann:{
 			onEqp:pId=>{ // Glass Canon
-				_P[pId].Inc
-					.TtlDmg(1,.25)
+				_Pƒ(pId).inc
+					.DMB(1,.25)
 					.IncDmg(.5)
 			},
 			onUnEqp:pId=>{
-				_P[pId].Dec
-					.TtlDmg(1,.25)
+				_Pƒ(pId).dec
+					.DMB(1,.25)
 					.IncDmg(.5)
 			},
 		},

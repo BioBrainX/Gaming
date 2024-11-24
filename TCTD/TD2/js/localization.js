@@ -5,22 +5,23 @@ en: {
 	// Offensives
 	CHC: `Critical Hit Chance`,
 	DAR: `AR Damage`,
+	DBA: `Total Weapon Damage Bonus Addifier`,
 	DBM: `Total Weapon Damage Bonus Multiplier`,
+	DBW: `Base Weapon Damage`,
 	DCH: `Critical Hit Damage`,
-	DHL: `Health Damage`,
+	DHP: `Health Damage`,
 	DHS: `HeadShot Damage`,
 	DLM: `LGM Damage`,
 	DMR: `MMR Damage`,
 	DOC: `Damage to Target Out Of Cover`,
 	DPT: `Pistol Damage`,
+	DRC: `Damage Receive`,
 	DRF: `Rifle Damage`,
 	DSG: `Shotgun Damage`,
 	DSM: `SMG Damage`,
 	DTA: `Damage to Armor`,
 	DTE: `Damage to Elites`,
 	DWP: `Weapon Damage`,
-	DBW: `Base Weapon Damage`,
-	DBA: `Total Weapon Damage Bonus Additively`,
 	WRF: `Rate of Fire`,
 	// Defensives
 	ARG: `Armour Regeneration`,
@@ -34,8 +35,10 @@ en: {
 	RBL: `Bleed Resistance`,
 	RBR: `Burn Resistance`,
 	RDF: `Bliend/Deaf Resistance`,
+	RDG: `Damage Resistance`,
 	RDO: `Disorient Resistance`,
 	RDR: `Disrupt Resistance`,
+	RFX: `Status Effects Resistance`,
 	RNS: `Ensnare Resistance`,
 	RSC: `Shock Resistance`,
 	RXP: `Explosive Resistance`,
@@ -56,10 +59,20 @@ en: {
 	WRL: `Reload Speed`,
 	WSB: `Stability`,
 	WSW: `Swap Speed`,
-	//Gears
+	// Gears
 	// Talents
 	GlsCann: `Glass Cannon`,
 	Vigil: `Vigilance`,
+	// Unique Named
+		// 5.11
+	DetGrp: `Deathgrips`,
+		// Brazos
+	Picaro: `Picaro's Holster`,
+		// Grupo
+	DorKik: `Door-Kicker's Knock`,
+		// Providence
+	Gift: `The Gift`,
+	Sacrfc: `The Sacrifice`,
 	// Guns / Weapons
 	WAR: `Assault Rifle`,
 	WSM: `Submachine Gun`,
@@ -75,5 +88,5 @@ fr: {
 es: {
 	_display: `Español`,
 },
-_dfult:`en`,
+_dfult: `en`,
 };
