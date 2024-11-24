@@ -18,10 +18,11 @@
 	--TD-Def	  : #73b8fe;		--TD-Def40		: #73b8fe66;		--TD-Def67		: #73b8feaa;
 	--TD-Uti	  : #fcd173;		--TD-Uti40		: #fcd17366;		--TD-Uti67		: #fcd173aa;
 	--TD-Hostile  : #ff3000;		--TD-Hostile40	: #ff300066;		--TD-Hostile67	: #ff3000aa;
-	--TD-Heal     : #8cc83c;		--TD-Heal40		: #8cc83c66;		--TD-Heal67		: #8cc83caa;
-	--TD-Teal     : #47e6dc;		--TD-Teal40		: #47e6dc66;		--TD-Teal67		: #47e6dcaa;
+	--TD-Heal	  : #8cc83c;		--TD-Heal40		: #8cc83c66;		--TD-Heal67		: #8cc83caa;
+	--TD-Fuchsia  : #fc1248;		--TD-Teal40		: #fc124866;		--TD-Teal67		: #fc1248aa;
+	--TD-Teal	  : #47e6dc;		--TD-Teal40		: #47e6dc66;		--TD-Teal67		: #47e6dcaa;
 	--TD-LiteGrey : #a6a6a6;		--TD-LiteGrey90	: #a6a6a6e6;
-	--TD-Grey     : #666666;		--TD-Grey90		: #666666e6;
+	--TD-Grey	  : #666666;		--TD-Grey90		: #666666e6;
 	--TD-DarkGrey : #242424;		--TD-DarkGrey90	: #242424e6;		--TD-DarkGrey67 : #242424aa;
 									 --Black90		 : #000000e6;		 --Black67		 : #000000aa;
 	--TD-HiN-Invrt: #0050ef;		--TD-HiN20-Invrt: #0050ef33;		--TD-HiN30-Invrt: #0050ef4c;
