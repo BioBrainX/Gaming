@@ -7,7 +7,7 @@
 		Designer:{Const,Deco,Supply},
 	},
 	Minimalist:{
-		Sciencetist/Mechatornics:{
+		Sciencetist/Mechatronics:{
 			Interest:[ Research,Operating, ],
 		},
 		Digger/Builder/Decor:{
@@ -19,13 +19,14 @@
 		}
 	},
 	Specialist:{
+		Notes:SpaceOutDLC,
 		All:{
-			Trait:[ -UnpracticedArtist ],
-			Stress:UglyCrier,
+			Trait:[ -KitchenMenace ],
+			Stress:UglyCrier, //Clean Water
 		},
 		Builder:{
-			Interest:[ Building,SuitWearing,Supplying ],
-			Trait:[ Mechatronics,Handy,TwinkleToes ],
+			Interest:[ Building,Decorating,Supplying ],
+			Trait:[ Mechatronics,Handy,Skill:Masterwork ],
 			Overjoy:Yodeler,
 		},
 		Digger:{
@@ -34,8 +35,13 @@
 			Overjoy:Balloon Artist,
 		},
 		Researcher:{
-			Interest:[ Research,Operating,Doctor ],
+			Interest:[ Research,Operating,Doctoring ],
 			Trait:[ NightOwl,QuickLearner,Caregiver ],
+			Overjoy:Super Productive,
+		},
+		Engineer:{
+			Interest:[ Operating,SuitWearing,Building ],
+			Trait:[ Mechatronics,ElectricEngineering,GreaseMonkey ],
 			Overjoy:Super Productive,
 		},
 		Chef/Farmer:{
@@ -49,13 +55,13 @@
 			Overjoy:Sticker Bomber,
 		},
 		Rancher:{
-			Interest:[ Ranching ],
-			Trait:[ AnimalLover, ],
+			Interest:[ Ranching,SuitWearing,Supplying ],
+			Trait:[ AnimalLover,Skill:CritterRanchingI ],
 			Overjoy:Super Productive,
 		},
 		Hauler:{
 			Interest:[ SuitWearing,Supplying,Tidying ],
-			Trait:[ ExoTrain,Buff,TwinkleToes ],
+			Trait:[ ExoSuitTrain,Buff,TwinkleToes ],
 			Overjoy:Sparkle Streaker,
 		},
 	}
