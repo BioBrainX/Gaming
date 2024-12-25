@@ -20,15 +20,11 @@
 		Creatures: {
 			Dupe: {
 				consume: {
-					O2: {
-						[`g/s`]: 100,
-					},
-					[`kcal/C`]:1000,
+					O2: { [`g/s`]: 100 },
+					[`kcal/C`]: 1000,
 				},
 				produce: {
-					CO2: {
-						[`g/s`]: 2,
-					},
+					CO2: { [`g/s`]: 2 },
 				},
 			},
 		},
@@ -50,28 +46,21 @@
 			[`Oxygen Diffuser`]: {
 				consume: {
 					[`W/s`]: 120,
-					Algae: {
-						[`g/s`]: 550,
-					},
+					Algae: { [`g/s`]: 550 },
 				},
 				produce: {
 					O2: {
 						[`g/s`]: 500,
 						[`°C`]: 30,
 					},
+					[`DTU/s`]: 1500,
 				},
 			},
 			['Algae Terrarium']: {
 				consume: {
-					Algae: {
-						[`g/s`]: 30,
-					},
-					H2O: {
-						[`g/s`]: 300,
-					},
-					CO2: {
-						[`g/s`]: 0.3333,
-					},
+					Algae: { [`g/s`]: 30 },
+					H2O: { [`g/s`]: 300 },
+					CO2: { [`g/s`]: 0.3333 },
 				},
 				produce: {
 					O2: {
@@ -96,9 +85,7 @@
 			Electrolyzer: {
 				consume: {
 					[`W/s`]: 120,
-					H2O: {
-						[`g/s`]: 1000,
-					},
+					H2O: { [`g/s`]: 1000 },
 				},
 				produce: {
 					O2: {
@@ -109,54 +96,37 @@
 						[`g/s`]: 112,
 						[`°C`]: 70,
 					},
+					[`DTU/s`]: 1250,
 				},
 			},
 			Deodorizer: {
 				consume: {
 					[`W/s`]: 5,
-					Sand: {
-						[`g/s`]: 133.33,
-					},
-					[`Polluted O2`]: {
-						[`g/s`]: 100,
-					},
+					Sand: { [`g/s`]: 133.33 },
+					[`Polluted O2`]: { [`g/s`]: 100 },
 				},
 				produce: {
-					Clay: {
-						[`g/s`]: 143.33,
-					},
-					O2: {
-						[`g/s`]: 90,
-					},
+					Clay: { [`g/s`]: 143.33 },
+					O2: { [`g/s`]: 90 },
 					[`DTU/s`]: 625,
 				},
 			},
 			[`Carbon Skimmer`]: {
 				consume: {
 					[`W/s`]: 120,
-					H2O: {
-						[`g/s`]: 1000,
-					},
-					CO2: {
-						[`g/s`]: 300,
-					},
+					H2O: { [`g/s`]: 1000 },
+					CO2: { [`g/s`]: 300 },
 				},
 				produce: {
-					[`Polluted H2O`]: {
-						[`g/s`]: 1000,
-					},
+					[`Polluted H2O`]: { [`g/s`]: 1000 },
 					[`DTU/s`]: 1000,
 				},
 			},
 			[`Rust Deoxidizer`]: {
 				consume: {
 					[`W/s`]: 60,
-					Fe2O3: {
-						[`g/s`]: 750,
-					},
-					NaCl: {
-						[`g/s`]: 250,
-					},
+					Fe2O3: { [`g/s`]: 750 },
+					NaCl: { [`g/s`]: 250 },
 				},
 				produce: {
 					O2: {
@@ -175,23 +145,15 @@
 				},
 			},
 		},
-		Refinements:{
+		Refinements: {
 			[`Water Sieve`]: {
 				consume: {
-					Sand: {
-						[`g/s`]: 1000,
-					},
-					[`Polluted H2O`]: {
-						[`g/s`]: 5000,
-					},
+					Sand: { [`g/s`]: 1000 },
+					[`Polluted H2O`]: { [`g/s`]: 5000 },
 				},
 				produce: {
-					H2O: {
-						[`g/s`]: 5000,
-					},
-					[`Polluted Dirt`]: {
-						[`g/s`]: 200,
-					},
+					H2O: { [`g/s`]: 5000 },
+					[`Polluted Dirt`]: { [`g/s`]: 200 },
 					[`DTU/s`]: 4000,
 				},
 			},
@@ -200,12 +162,8 @@
 			['Bristle Blossom']: {
 				require: { light: 1 },
 				consume: {
-					H2O: {
-						[`g/s`]: 5,
-					},
-					CO2: {
-						[`g/s`]: 0.2,
-					},
+					H2O: { [`g/s`]: 5 },
+					CO2: { [`g/s`]: 0.2 },
 				},
 				produce: {
 					['Bristle Berry']: {
@@ -216,15 +174,9 @@
 			},
 			[`Oxyfern`]: {
 				consume: {
-					CO2: {
-						[`g/s`]: 375,
-					},
-					H2O: {
-						[`g/C`]: 19000,
-					},
-					Dirt: {
-						[`g/C`]: 4000,
-					},
+					CO2: { [`g/s`]: 375 },
+					H2O: { [`g/C`]: 19000 },
+					Dirt: { [`g/C`]: 4000 },
 				},
 				produce: {
 					O2: {
@@ -237,14 +189,10 @@
 		Power: {
 			['Coal Generator']: {
 				consume: {
-					Coal: {
-						[`g/s`]: 1000,
-					},
+					Coal: { [`g/s`]: 1000 },
 				},
 				produce: {
-					CO2: {
-						[`g/s`]: 20,
-					},
+					CO2: { [`g/s`]: 20 },
 					[`W/s`]: 600,
 					[`DTU/s`]: 9,
 				},
@@ -253,7 +201,7 @@
 					efficiency: 0.5,
 				},
 			},
-			[`Manual Generator`]: {	
+			[`Manual Generator`]: {
 				produce: {
 					[`W/s`]: 400,
 					[`DTU/s`]: 1000,
@@ -277,11 +225,11 @@ for (const category in buildings) {
 			if (is(props).obj())
 				for (const el in props) {
 					const val = props[el]
-					const cpp = c_p_p + 'r'
+					const cpp = c_p_p + (c_p_p.match(/e$/) ? 'r' : '')
 					if (!db[el]) db[el] = { [cpp]: { [name]: val } }
 					else if (!db[el][cpp]) db[el][cpp] = { [name]: val }
 					else db[el][cpp][name] = val
-					// set per sec mass from mass per Cycle
+					// set mass per sec from mass per Cycle
 					if (val['g/C']) db[el][cpp][name]['g/s'] = val['g/C'] / ttlSecPerCycle
 				}
 		}
