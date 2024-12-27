@@ -3,21 +3,12 @@
 const get = {
 	Building: function (b) {
 		const building = db[b],
-			mass = 'g/s'
+			mass = 'g/s',
+			power = 'W/s'
+		building.Ratio ??= {}
 		return {
 			Ratio: {
-				elements: function (a, b) {
-					const a2b = `${a} → ${b}`,
-						el = { consume: building.consume[a], produce: building.produce[b] }
-
-					if (building.ratio?.[a2b]) return building.ratio[a2b]
-					if (!building.consume[a] || !building.produce[b]) return
-					if (!building.ratio) building.ratio = {}
-					building.ratio[a2b] = el.produce[mass] / el.consume[mass]
-					return this
-				},
 				IO: function () {
-					// clog(this,'IO')
 					const Total = {}
 					for (const io of ['consume', 'produce']) {
 						const io_elmts = building[io]
@@ -31,8 +22,32 @@ const get = {
 						}
 					}
 					this.elements('Algae', 'O2')
-					return (Total.io_ratio = building.io_ratio =
-						Total.produce[mass] / Total.consume[mass])
+					clog(Total)
+					return (
+						building.Ratio.IO ||
+						(Total.io_ratio = building.Ratio.IO =
+							Total.produce[mass] / Total.consume[mass])
+					)
+				},
+				elements: function (a, b) {
+					const a2b = `${a} → ${b}`,
+						el = {
+							consume: building.consume[a],
+							produce: building.produce[b],
+						}
+
+					if (!building.Ratio[a2b] && el.consume && el.produce)
+						building.Ratio[a2b] = el.produce[mass] / el.consume[mass]
+					clog(building.Ratio[a2b])
+					return this
+				},
+				Power: function (el) {
+					const a2b = `${el} → ${power}`
+
+					if (!building.Ratio[a2b] && building.consume[el] && building.produce[power])
+						building.Ratio[a2b] = building.produce[power] / building.consume[el][mass]
+					clog(building.Ratio[a2b])
+					return this
 				},
 			},
 		}
