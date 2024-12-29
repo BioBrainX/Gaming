@@ -1,32 +1,39 @@
-﻿const ttlSecPerCycle = 6e2,
+﻿clogt('ONIdb')
+
+const ttlSecPerCycle = 6e2,
+	mass = 'g',
+	massPrSec = `${mass}/s`,
+	massPrCyc = `${mass}/C`,
+	power = 'W/s',
 	db = {
-		Elements: [
-			// States are @ room temp 18-24°C
+		Elements: {
+			// States are @ comfort temp -89..71.85°C
 			// Gas
-			`CH4`,
-			`Cl2`,
-			`CO2`,
-			`H2`,
-			`O2`,
-			`Polluted O2`,
+			CH4: {},
+			Cl2: {},
+			CO2: {},
+			H2: {},
+			O2: {},
+			['Polluted O2']: {},
 			// Liquid
-			`Ethanol`,
-			`H2O`,
-			`Petroleum`,
-			`Polluted H2O`,
+			Ethanol: {},
+			H2O: {},
+			Petroleum: {},
+			['Polluted H2O']: {},
 			// Solid
-			`Algae`,
-			`Clay`,
-			`Coal`,
-			`Cu`,
-			`Dirt`,
-			`Fe`,
-			`Fe2O3`,
-			`NaCl`,
-			`Polluted Dirt`,
-			`Sand`,
-			`Wood`,
-		],
+			Algae: {},
+			Clay: {},
+			Coal: {},
+			Cu: {},
+			Dirt: {},
+			Fe: {},
+			Fe2O3: {},
+			NaCl: {},
+			Slime: {},
+			['Polluted Dirt']: {},
+			Sand: {},
+			Wood: {},
+		},
 		Creatures: {
 			Dupe: {
 				consume: {
@@ -35,6 +42,14 @@
 				},
 				produce: {
 					CO2: { [`g/s`]: 2 },
+				},
+			},
+			Puft: {
+				consume: {
+					[`Polluted O2`]: { [`g/C`]: 5e4 },
+				},
+				produce: {
+					Slime: { [`g/C`]: 475e2 },
 				},
 			},
 		},
@@ -46,10 +61,7 @@
 					CO2: { [`g/s`]: 0.2 },
 				},
 				produce: {
-					['Bristle Berry']: {
-						[`g/s`]: 1,
-						[`°C`]: 30,
-					},
+					['Bristle Berry']: { [`g/s`]: 1e3, [`°C`]: 30 },
 				},
 			},
 			[`Oxyfern`]: {
@@ -59,10 +71,7 @@
 					Dirt: { [`g/C`]: 4e3 },
 				},
 				produce: {
-					O2: {
-						[`g/C`]: 18780,
-						[`°C`]: 30,
-					},
+					O2: { [`g/C`]: 18780, [`°C`]: 30 },
 				},
 			},
 		},
@@ -88,10 +97,7 @@
 						Algae: { [`g/s`]: 550 },
 					},
 					produce: {
-						O2: {
-							[`g/s`]: 5e2,
-							[`°C`]: 30,
-						},
+						O2: { [`g/s`]: 5e2, [`°C`]: 30 },
 						[`DTU/s`]: 15e2,
 					},
 				},
@@ -99,17 +105,11 @@
 					consume: {
 						Algae: { [`g/s`]: 30 },
 						H2O: { [`g/s`]: 3e2 },
-						CO2: { [`g/s`]: 0.3333 },
+						CO2: { [`g/s`]: 1 / 3 },
 					},
 					produce: {
-						O2: {
-							[`g/s`]: 40,
-							[`°C`]: 30,
-						},
-						['Polluted H2O']: {
-							[`g/s`]: 290.3333,
-							[`°C`]: 30,
-						},
+						O2: { [`g/s`]: 40, [`°C`]: 30 },
+						['Polluted H2O']: { [`g/s`]: 871 / 3, [`°C`]: 30 },
 					},
 					properties: {
 						floodable: true,
@@ -127,25 +127,19 @@
 						H2O: { [`g/s`]: 1e3 },
 					},
 					produce: {
-						O2: {
-							[`g/s`]: 888,
-							[`°C`]: 70,
-						},
-						H2: {
-							[`g/s`]: 112,
-							[`°C`]: 70,
-						},
+						O2: { [`g/s`]: 888, [`°C`]: 70 },
+						H2: { [`g/s`]: 112, [`°C`]: 70 },
 						[`DTU/s`]: 1250,
 					},
 				},
 				Deodorizer: {
 					consume: {
 						[`W/s`]: 5,
-						Sand: { [`g/s`]: 133.33 },
+						Sand: { [`g/s`]: 4e2 / 3 },
 						[`Polluted O2`]: { [`g/s`]: 1e2 },
 					},
 					produce: {
-						Clay: { [`g/s`]: 143.33 },
+						Clay: { [`g/s`]: 430 / 3 },
 						O2: { [`g/s`]: 90 },
 						[`DTU/s`]: 625,
 					},
@@ -168,18 +162,9 @@
 						NaCl: { [`g/s`]: 250 },
 					},
 					produce: {
-						O2: {
-							[`g/s`]: 570,
-							[`°C`]: 75,
-						},
-						Fe: {
-							[`g/s`]: 4e2,
-							[`°C`]: 75,
-						},
-						Cl2: {
-							[`g/s`]: 30,
-							[`°C`]: 75,
-						},
+						O2: { [`g/s`]: 570, [`°C`]: 75 },
+						Fe: { [`g/s`]: 4e2, [`°C`]: 75 },
+						Cl2: { [`g/s`]: 30, [`°C`]: 75 },
 						[`DTU/s`]: 1130,
 					},
 				},
@@ -194,6 +179,60 @@
 						H2O: { [`g/s`]: 5e3 },
 						[`Polluted Dirt`]: { [`g/s`]: 200 },
 						[`DTU/s`]: 4e3,
+					},
+				},
+				Outhouse: {
+					consume: {
+						Dirt: { [`g/s`]: 13 },
+					},
+					produce: {
+						[`Polluted Dirt`]: { [`g/s`]: 197e2, [`°C`]: 37 },
+						[`DTU/s`]: 250,
+						Germ: 2e5,
+					},
+					properties: {
+						floodable: false,
+					},
+				},
+				Lavatory: {
+					consume: {
+						H2O: { [`g/s`]: 5e3 },
+					},
+					produce: {
+						[`Polluted H2O`]: { [`g/s`]: 117e2 },
+						Germ: 105e3,
+						[`DTU/s`]: 250,
+					},
+				},
+				[`Algae Distiller`]: {
+					consume: {
+						Slime: { [`g/s`]: 6e2 },
+						[`W/s`]: 120,
+					},
+					produce: {
+						Algae: { [`g/s`]: 2e2 },
+						[`Polluted H2O`]: { [`g/s`]: 4e2 },
+						[`DTU/s`]: 15e2,
+					},
+				},
+				[`Ethanol Distiller`]: {
+					consume: {
+						Wood: { [`g/s`]: 1e3 },
+						[`W/s`]: 120 * 2,
+					},
+					produce: {
+						Ethanol: { [`g/s`]: 5e2 },
+						[`Polluted Dirt`]: { [`g/s`]: 1e3 / 3 },
+						CO2: { [`g/s`]: 5e2 / 3 },
+						[`DTU/s`]: 45e2,
+					},
+				},
+				[`Rock Crusher`]: {
+					consume: {
+						[`W/s`]: 120 * 2,
+					},
+					produce: {
+						[`DTU/s`]: 16e3,
 					},
 				},
 			},
@@ -301,9 +340,7 @@
 	}
 
 ;(function () {
-	const elmts = [...db.Elements]
-	db.Elements = {}
-	for (const el of elmts) db[el] = db.Elements[el] = {}
+	for (const el in db.Elements) db[el] = db.Elements[el]
 	for (const category in db.Buildings) xtractIOP(db.Buildings[category], category)
 	for (const category of ['Creatures', 'Plants']) xtractIOP(db[category], category)
 
@@ -344,3 +381,5 @@
 })()
 
 clog(db)
+
+clogtEnd('ONIdb')
