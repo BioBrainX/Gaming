@@ -4,6 +4,8 @@ const ttlSecPerCycle = 6e2,
 	mass = 'g',
 	massPrSec = `${mass}/s`,
 	massPrCyc = `${mass}/C`,
+	food = `kcal`,
+	foodPrMass = 16e2,
 	power = 'W/s',
 	db = {
 		Elements: {
@@ -11,26 +13,35 @@ const ttlSecPerCycle = 6e2,
 			// Gas
 			CH4: {},
 			Cl2: {},
-			CO2: {},
+			CO2: { source: ['O2'] },
 			H2: {},
-			O2: {},
-			['Polluted O2']: {},
+			O2: { source: ['Algae', 'Fe2O3', 'H2O', 'Polluted O2'] },
+			['Polluted O2']: { source: ['Polluted H2O', 'Polluted Dirt'] },
 			// Liquid
-			Ethanol: {},
-			H2O: {},
+			Ethanol: { source: ['Wood'] },
+			H2O: { source: ['Polluted H2O','Steam'] },
 			Petroleum: {},
-			['Polluted H2O']: {},
+			['Polluted H2O']: { source: ['CO2'] },
 			// Solid
-			Algae: {},
-			Clay: {},
+			Algae: { source: ['Slime'] },
+			Clay: { source: ['Sand'] },
 			Coal: {},
 			Cu: {},
-			Dirt: {},
+			Dirt: { source: ['Polluted Dirt'] },
 			Fe: {},
 			Fe2O3: {},
 			NaCl: {},
-			Slime: {},
-			['Polluted Dirt']: {},
+			Slime: {
+				emit: {
+					['Polluted O2']: { ratio: 18 / 37 },
+				},
+			},
+			['Polluted Dirt']: {
+				source: ['Polluted H2O'],
+				emit: {
+					['Polluted O2']: { ratio: 18 / 37 },
+				},
+			},
 			Sand: {},
 			Wood: {},
 		},
@@ -52,16 +63,32 @@ const ttlSecPerCycle = 6e2,
 					Slime: { [`g/C`]: 475e2 },
 				},
 			},
+			Oakshell: {
+				consume: {
+					['Polluted Dirt, Rot Pile, Slime']: { [`g/C`]: 7e4 },
+				},
+				produce: {
+					Sand: { [`g/C`]: 175e2 }, // 25% of mass consumed
+					['Oakshell Molt']: { [`g/C`]: 1e5 },
+				},
+			},
+			Flox: {
+				consume: {
+					[`Pikeapple, Bristle Berry`]: { [`kcal/C`]: 160 },
+				},
+				produce: {
+					Wood: { [`g/C`]: 6e4 },
+				},
+			},
 		},
 		Plants: {
 			['Bristle Blossom']: {
-				require: { light: 1 },
+				require: { lux: 200 },
 				consume: {
-					H2O: { [`g/s`]: 5 },
-					CO2: { [`g/s`]: 0.2 },
+					H2O: { [`g/C`]: 2e4 },
 				},
 				produce: {
-					['Bristle Berry']: { [`g/s`]: 1e3, [`°C`]: 30 },
+					['Bristle Berry']: { [`kcal/C`]: 267 },
 				},
 			},
 			[`Oxyfern`]: {
@@ -74,6 +101,24 @@ const ttlSecPerCycle = 6e2,
 					O2: { [`g/C`]: 18780, [`°C`]: 30 },
 				},
 			},
+			[`Arbor Tree`]: {
+				consume: {
+					['Polluted H2O']: { [`g/C`]: 70 },
+					Dirt: { [`g/C`]: 1e4 },
+				},
+				produce: {
+					Wood: { [`g/s`]: (5 * 3e2) / 4.5 },
+				},
+			},
+			// [`Mushroom`]: {
+			// 	consume: {
+			// 		H2O: { [`g/s`]: 1e3 },
+			// 		CO2: { [`g/s`]: 1e3 },
+			// 	},
+			// 	produce: {
+			// 		[`Mush Bar`]: { [`g/s`]: 1e3, [`°C`]: 30 },
+			// 	},
+			// },
 		},
 		Buildings: {
 			Storages: {
@@ -234,6 +279,21 @@ const ttlSecPerCycle = 6e2,
 					produce: {
 						[`DTU/s`]: 16e3,
 					},
+					// recipes:{
+
+					// },
+				},
+				[`Sublimation Station`]: {
+					consume: {
+						[`Polluted Dirt`]: { [`g/s`]: 1e3 },
+						[`W/s`]: 120 / 2,
+					},
+					produce: {
+						[`Polluted O2`]: { [`g/s`]: 660 },
+					},
+					required: {
+						DLC: 'Spaced Out!',
+					},
 				},
 			},
 			Power: {
@@ -314,9 +374,10 @@ const ttlSecPerCycle = 6e2,
 				},
 				[`Steam Turbine`]: {
 					consume: {
-						Steam: { [`g/s`]: 2e2, [`°C`]: 125 },
+						Steam: { [`g/s`]: 2e3, [`°C`]: 125 },
 					},
 					produce: {
+						H2O: { [`g/s`]: 2e3, [`°C`]: 95 },
 						[`W/s`]: 8e2,
 						[`DTU/s`]: 1e4,
 					},
@@ -341,6 +402,7 @@ const ttlSecPerCycle = 6e2,
 
 ;(function () {
 	for (const el in db.Elements) db[el] = db.Elements[el]
+	// _.merge(db, db.Elements)
 	for (const category in db.Buildings) xtractIOP(db.Buildings[category], category)
 	for (const category of ['Creatures', 'Plants']) xtractIOP(db[category], category)
 
@@ -349,29 +411,32 @@ const ttlSecPerCycle = 6e2,
 			const i_o_p = data[name]
 			db[name] = i_o_p
 			db[name].category = category
-			for (const cpp in i_o_p) {
+			for (const iop in i_o_p) {
 				//consume,produce,properties
-				const Elmts = i_o_p[cpp]
+				const Elmts = i_o_p[iop]
 				if (is(Elmts).obj())
 					for (const el in Elmts) {
 						const val = Elmts[el],
-							cppr = cpp + (cpp.match(/e$/) ? 'r' : '')
+							iopr = iop + (iop.match(/e$/) ? 'r' : '')
 
 						if (el.match(/,/)) for (const e of el.split(/\s*,\s*/)) setIOP(e)
 						else setIOP(el)
 
 						function setIOP(el) {
-							if (!db[el]) db[el] = { [cppr]: {} }
-							else if (!db[el][cppr]) db[el][cppr] = {}
+							db[el] ??= { [iopr]: {} }
+							db[el][iopr] ??= {}
 
 							if (is(val).bool()) {
-								if (!db[el][cppr][val]) db[el][cppr][val] = []
-								db[el][cppr][val].push(name)
+								db[el][iopr][val] ??= []
+								db[el][iopr][val].push(name)
 							} else {
-								db[el][cppr][name] = val
+								db[el][iopr][name] = val
 								// set mass per sec from mass per Cycle
 								if (val['g/C'])
-									db[el][cppr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
+									db[el][iopr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
+								else if (val['kcal/C'])
+									db[el][iopr][name]['g/s'] =
+										val['kcal/C'] / foodPrMass / ttlSecPerCycle
 							}
 						}
 					}
