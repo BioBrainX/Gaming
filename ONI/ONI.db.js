@@ -10,41 +10,50 @@ const ttlSecPerCycle = 6e2,
 	db = {
 		Elements: {
 			// States are @ comfort temp -89..71.85°C
-			// Gas
-			CH4: {},
-			Cl2: {},
-			CO2: { source: ['O2'] },
-			H2: {},
-			O2: { source: ['Algae', 'Fe2O3', 'H2O', 'Polluted O2'] },
-			['Polluted O2']: { source: ['Polluted H2O', 'Polluted Dirt'] },
-			// Liquid
-			Ethanol: { source: ['Wood'] },
-			H2O: { source: ['Polluted H2O','Steam'] },
-			Petroleum: {},
-			['Polluted H2O']: { source: ['CO2'] },
-			// Solid
-			Algae: { source: ['Slime'] },
-			Clay: { source: ['Sand'] },
-			Coal: {},
-			Cu: {},
-			Dirt: { source: ['Polluted Dirt'] },
-			Fe: {},
-			Fe2O3: {},
-			NaCl: {},
-			Slime: {
-				emit: {
-					['Polluted O2']: { ratio: 18 / 37 },
-				},
+			Gas: {
+				CH4: {},
+				Cl2: {},
+				CO2: {},
+				H2: {},
+				O2: {},
+				['Polluted O2']: {},
 			},
-			['Polluted Dirt']: {
-				source: ['Polluted H2O'],
-				emit: {
-					['Polluted O2']: { ratio: 18 / 37 },
-				},
+			Liquid: {
+				Ethanol: {},
+				H2O: {},
+				Petroleum: {},
+				['Polluted H2O']: {},
 			},
-			Sand: {},
-			Wood: {},
+			Solid: {
+				Algae: {},
+				Clay: {},
+				Coal: {},
+				Cu: {},
+				Dirt: {},
+				Fe: {},
+				Fe2O3: {},
+				NaCl: {},
+				Oxylite: {
+					emit: {
+						O2: { ratio: 0.5 },
+					},
+				},
+				Slime: {
+					emit: {
+						['Polluted O2']: { ratio: 18 / 37 },
+					},
+				},
+				['Polluted Dirt']: {
+					emit: {
+						['Polluted O2']: ø, //{ ratio: 18 / 37 },
+					},
+				},
+				Sand: {},
+				Wood: {},
+			},
 		},
+		Compostable: ['Egg Shell', 'Foods', 'Polluted Dirt', 'Rot Pile', 'Seeds'],
+		Foods: ['Bristle Berry', 'Pikeapple'],
 		Creatures: {
 			Dupe: {
 				consume: {
@@ -161,7 +170,7 @@ const ttlSecPerCycle = 6e2,
 						efficiency: {
 							val: 0.1,
 							condition: {
-								light: 1, //lumen
+								lux: 1, //light
 							},
 						},
 					},
@@ -215,6 +224,31 @@ const ttlSecPerCycle = 6e2,
 				},
 			},
 			Refinements: {
+				Compost: {
+					consume: {
+						Compostable: { [`g/s`]: 1e2 },
+					},
+					produce: {
+						Dirt: { [`g/s`]: 1e2, [`°C`]: 75 },
+						[`DTU/s`]: 1125,
+					},
+					properties: {
+						floodable: false,
+					},
+				},
+				Outhouse: {
+					consume: {
+						Dirt: { [`g/s`]: 13e3 },
+					},
+					produce: {
+						[`Polluted Dirt`]: { [`g/s`]: 197e2, [`°C`]: 37 },
+						[`DTU/s`]: 250,
+						Germ: 2e5,
+					},
+					properties: {
+						floodable: false,
+					},
+				},
 				[`Water Sieve`]: {
 					consume: {
 						Sand: { [`g/s`]: 1e3 },
@@ -226,18 +260,16 @@ const ttlSecPerCycle = 6e2,
 						[`DTU/s`]: 4e3,
 					},
 				},
-				Outhouse: {
+				[`Rock Crusher`]: {
 					consume: {
-						Dirt: { [`g/s`]: 13 },
+						[`W/s`]: 120 * 2,
 					},
 					produce: {
-						[`Polluted Dirt`]: { [`g/s`]: 197e2, [`°C`]: 37 },
-						[`DTU/s`]: 250,
-						Germ: 2e5,
+						[`DTU/s`]: 16e3,
 					},
-					properties: {
-						floodable: false,
-					},
+					// recipes:{
+
+					// },
 				},
 				Lavatory: {
 					consume: {
@@ -271,17 +303,6 @@ const ttlSecPerCycle = 6e2,
 						CO2: { [`g/s`]: 5e2 / 3 },
 						[`DTU/s`]: 45e2,
 					},
-				},
-				[`Rock Crusher`]: {
-					consume: {
-						[`W/s`]: 120 * 2,
-					},
-					produce: {
-						[`DTU/s`]: 16e3,
-					},
-					// recipes:{
-
-					// },
 				},
 				[`Sublimation Station`]: {
 					consume: {
@@ -328,7 +349,7 @@ const ttlSecPerCycle = 6e2,
 						[`DTU/s`]: 9,
 					},
 					properties: {
-						floodable: true,
+						floodable: false,
 						efficiency: 0.5,
 					},
 				},
@@ -387,7 +408,7 @@ const ttlSecPerCycle = 6e2,
 				},
 				['Solar Panel']: {
 					consume: {
-						light: 7 * 5e4, // 7 tiles * 5e4 lumens per tile
+						lux: 7 * 5e4, // 7 tiles * 5e4 lumens per tile
 					},
 					produce: {
 						[`W/s`]: 380,
@@ -399,52 +420,5 @@ const ttlSecPerCycle = 6e2,
 			},
 		},
 	}
-
-;(function () {
-	for (const el in db.Elements) db[el] = db.Elements[el]
-	// _.merge(db, db.Elements)
-	for (const category in db.Buildings) xtractIOP(db.Buildings[category], category)
-	for (const category of ['Creatures', 'Plants']) xtractIOP(db[category], category)
-
-	function xtractIOP(data, category) {
-		for (const name in data) {
-			const i_o_p = data[name]
-			db[name] = i_o_p
-			db[name].category = category
-			for (const iop in i_o_p) {
-				//consume,produce,properties
-				const Elmts = i_o_p[iop]
-				if (is(Elmts).obj())
-					for (const el in Elmts) {
-						const val = Elmts[el],
-							iopr = iop + (iop.match(/e$/) ? 'r' : '')
-
-						if (el.match(/,/)) for (const e of el.split(/\s*,\s*/)) setIOP(e)
-						else setIOP(el)
-
-						function setIOP(el) {
-							db[el] ??= { [iopr]: {} }
-							db[el][iopr] ??= {}
-
-							if (is(val).bool()) {
-								db[el][iopr][val] ??= []
-								db[el][iopr][val].push(name)
-							} else {
-								db[el][iopr][name] = val
-								// set mass per sec from mass per Cycle
-								if (val['g/C'])
-									db[el][iopr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
-								else if (val['kcal/C'])
-									db[el][iopr][name]['g/s'] =
-										val['kcal/C'] / foodPrMass / ttlSecPerCycle
-							}
-						}
-					}
-			}
-		}
-	}
-})()
-
-clog(db)
 
 clogtEnd('ONIdb')
