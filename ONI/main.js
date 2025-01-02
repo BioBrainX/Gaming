@@ -64,7 +64,7 @@ function Calc(t) {
 					target.Ratio[a2b] = el.produce[mass] / el.consume[mass]
 					const els = a?.match(/,/)
 						? a.split(/\s*,\s*/)
-						: a.match(/^Compostable|Foods$/)
+						: a.match(/Compostable|Foods/)
 						? Object.keys(db[a])
 						: ø
 					if (els)
@@ -96,7 +96,7 @@ function Calc(t) {
 						target.Ratio[a2b] = target.produce[power] / target.consume[a][mass]
 						const els = a?.match(/,/)
 							? a.split(/\s*,\s*/)
-							: a.match(/^Compostable|Foods$/)
+							: a.match(/Compostable|Foods/)
 							? Object.keys(db[a])
 							: ø
 						if (els)
@@ -184,7 +184,7 @@ function Calc(t) {
 
 						const els = el.match(/,/)
 							? el.split(/\s*,\s*/)
-							: el.match(/^Compostable|Foods$/)
+							: el.match(/Compostable|Foods/)
 							? Object.keys(db[el])
 							: ø
 

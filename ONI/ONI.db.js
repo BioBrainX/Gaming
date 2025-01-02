@@ -119,6 +119,23 @@ const ttlSecPerCycle = 6e2,
 					Wood: { [`g/s`]: (5 * 3e2) / 4.5 },
 				},
 			},
+			Wheezewort: {
+				consume: {
+					Phosporite: { [`g/C`]: 4e3 },
+					Gas: { [`g/s`]: 1e3 },
+				},
+				produce: {
+					[`DTU/s`]: 1e3,
+					Gas: { [`g/s`]: 1e3, [`°C`]: 5 },
+				},
+				properties: {
+					floodable: false,
+					height: 2,
+					widht: 1,
+					decor: 15,
+					range: 2,
+				},
+			},
 			// [`Mushroom`]: {
 			// 	consume: {
 			// 		H2O: { [`g/s`]: 1e3 },
@@ -347,7 +364,7 @@ const ttlSecPerCycle = 6e2,
 						Coal: { [`g/s`]: 1e3 },
 					},
 					produce: {
-						CO2: { [`g/s`]: 20 },
+						CO2: { [`g/s`]: 20, [`°C`]: 110 },
 						[`W/s`]: 6e2,
 						[`DTU/s`]: 9,
 					},
