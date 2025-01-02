@@ -58,10 +58,18 @@ function Calc(t) {
 						produce: target.produce[b],
 					}
 
+				// clog(a2b, t, db)
 				if (!target.Ratio[a2b]) {
 					// && el.consume && el.produce)
 					target.Ratio[a2b] = el.produce[mass] / el.consume[mass]
-					db[b].source[a][t] = { Ratio: target.Ratio[a2b] }
+					const els = a?.match(/,/)
+						? a.split(/\s*,\s*/)
+						: a.match(/^Compostable|Foods$/)
+						? Object.keys(db[a])
+						: ø
+					if (els)
+						for (const el of els) db[b].source[el][t] = { Ratio: target.Ratio[a2b] }
+					else db[b].source[a][t] = { Ratio: target.Ratio[a2b] }
 				}
 				// clog(target.Ratio[a2b])
 
@@ -80,13 +88,21 @@ function Calc(t) {
 
 					return target.Ratio[a2b] // this
 				},
-				out: function (el) {
-					const a2b = `${el} → ${power}`
+				out: function (a) {
+					const a2b = `${a} → ${power}`
 
 					if (!target.Ratio[a2b]) {
 						// && target.consume[el] && target.produce[power])
-						target.Ratio[a2b] = target.produce[power] / target.consume[el][mass]
-						db[power].source[el][t] = { Ratio: target.Ratio[a2b] }
+						target.Ratio[a2b] = target.produce[power] / target.consume[a][mass]
+						const els = a?.match(/,/)
+							? a.split(/\s*,\s*/)
+							: a.match(/^Compostable|Foods$/)
+							? Object.keys(db[a])
+							: ø
+						if (els)
+							for (const el of els)
+								db[power].source[el][t] = { Ratio: target.Ratio[a2b] }
+						else db[power].source[a][t] = { Ratio: target.Ratio[a2b] }
 					}
 					// clog(el, target.Ratio[a2b])
 
@@ -137,7 +153,8 @@ function Calc(t) {
 	for (const category of ['Foods', 'Compostable']) {
 		const elmts = [...db[category]]
 		db[category] = {}
-		for (const el of elmts) db[category][el] = initEl(elmts, el, category)
+		for (const el of elmts)
+			db[category][el] = el.match(/Foods/) ? db.Foods : initEl(elmts, el, category)
 	}
 
 	function initEl(source, el, category) {
@@ -165,19 +182,25 @@ function Calc(t) {
 						const val = Elmts[el],
 							iopr = iop + (iop.match(/e$/) ? 'r' : '')
 
-						if (iop == 'consume')
-							for (const el_P in i_o_p.produce) {
-								db[el_P] ??= { source: { [el]: { [name]: {} } } }
-								db[el_P].source ??= { [el]: { [name]: {} } }
-								db[el_P].source[el] ??= { [name]: {} }
-							}
-
 						const els = el.match(/,/)
 							? el.split(/\s*,\s*/)
-							: el.match(/^Compostable$/)
+							: el.match(/^Compostable|Foods$/)
 							? Object.keys(db[el])
-							: []
-						if (els.length) for (const e of els) setIOP(e)
+							: ø
+
+						if (iop == 'consume')
+							for (const el_P in i_o_p.produce) {
+								if (els) for (const e of els) initSource(e)
+								else initSource(el)
+
+								function initSource(el) {
+									db[el_P] ??= { source: { [el]: { [name]: {} } } }
+									db[el_P].source ??= { [el]: { [name]: {} } }
+									db[el_P].source[el] ??= { [name]: {} }
+								}
+							}
+
+						if (els) for (const e of els) setIOP(e)
 						else setIOP(el)
 
 						function setIOP(el) {

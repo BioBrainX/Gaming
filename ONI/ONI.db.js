@@ -298,10 +298,13 @@ const ttlSecPerCycle = 6e2,
 						[`W/s`]: 120 * 2,
 					},
 					produce: {
-						Ethanol: { [`g/s`]: 5e2 },
-						[`Polluted Dirt`]: { [`g/s`]: 1e3 / 3 },
-						CO2: { [`g/s`]: 5e2 / 3 },
+						Ethanol: { [`g/s`]: 5e2, [`°C`]: 73.4 },
+						[`Polluted Dirt`]: { [`g/s`]: 1e3 / 3, [`°C`]: 93.4 },
+						CO2: { [`g/s`]: 5e2 / 3, [`°C`]: 93.4 },
 						[`DTU/s`]: 45e2,
+					},
+					properties: {
+						floodable: false,
 					},
 				},
 				[`Sublimation Station`]: {
