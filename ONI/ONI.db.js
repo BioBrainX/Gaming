@@ -4,8 +4,9 @@ const ttlSecPerCycle = 6e2,
 	mass = 'g',
 	massPrSec = `${mass}/s`,
 	massPrCyc = `${mass}/C`,
+	ttlMassPrUnit = 4e2,
 	food = `kcal`,
-	foodPrMass = 16e2,
+	foodPrMass = `${food}/${mass}`,
 	power = 'W/s',
 	db = {
 		Elements: {
@@ -53,7 +54,12 @@ const ttlSecPerCycle = 6e2,
 			},
 		},
 		Compostable: ['Egg Shell', 'Foods', 'Polluted Dirt', 'Rot Pile', 'Seeds'],
-		Foods: ['Bristle Berry', 'Pikeapple'],
+		Foods: {
+			['Meal Lice']: { ['kcal/g']: 6e2 },
+			['Bristle Berry']: { ['kcal/g']: 16e2 },
+			Pikeapple: { ['kcal/g']: 8e2 },
+			Meat: { ['kcal/g']: 16e2 },
+		},
 		Creatures: {
 			Dupe: {
 				consume: {
@@ -62,6 +68,14 @@ const ttlSecPerCycle = 6e2,
 				},
 				produce: {
 					CO2: { [`g/s`]: 2 },
+				},
+			},
+			Drecko: {
+				consume: {
+					Mealwood: { [`kcal/C`]: 1e3 },
+				},
+				produce: {
+					Phosporite: { [`g/C`]: 1e4 },
 				},
 			},
 			Puft: {
@@ -91,6 +105,22 @@ const ttlSecPerCycle = 6e2,
 			},
 		},
 		Plants: {
+			Mealwood: {
+				consume: {
+					Dirt: { [`g/C`]: 1e4 },
+				},
+				produce: {
+					[`Meal Lice`]: { [`kcal/C`]: 6e2 / 3 },
+				},
+				properties: {
+					['Life Cycle']: 3,
+					floodable: false,
+					height: 2,
+					widht: 1,
+					decor: -10,
+					range: 2,
+				},
+			},
 			['Bristle Blossom']: {
 				require: { lux: 200 },
 				consume: {
@@ -98,6 +128,30 @@ const ttlSecPerCycle = 6e2,
 				},
 				produce: {
 					['Bristle Berry']: { [`kcal/C`]: 267 },
+				},
+				properties: {
+					['Life Cycle']: 6,
+					floodable: false,
+					height: 2,
+					widht: 1,
+					decor: 15,
+					range: 2,
+				},
+			},
+			['Thimble Reed']: {
+				consume: {
+					['Polluted H2O']: { [`g/C`]: 16e4 },
+				},
+				produce: {
+					['Reed Fiber']: { [`unit/C`]: 1 / 2 },
+				},
+				properties: {
+					['Life Cycle']: 2,
+					floodable: true,
+					height: 3,
+					widht: 1,
+					decor: 10,
+					range: 1,
 				},
 			},
 			[`Oxyfern`]: {
@@ -112,11 +166,19 @@ const ttlSecPerCycle = 6e2,
 			},
 			[`Arbor Tree`]: {
 				consume: {
-					['Polluted H2O']: { [`g/C`]: 70 },
+					['Polluted H2O']: { [`g/C`]: 7e4 },
 					Dirt: { [`g/C`]: 1e4 },
 				},
 				produce: {
 					Wood: { [`g/s`]: (5 * 3e2) / 4.5 },
+				},
+				properties: {
+					['Life Cycle']: 4.5,
+					floodable: true,
+					height: 3,
+					widht: 3,
+					decor: 15,
+					range: 2,
 				},
 			},
 			Wheezewort: {
