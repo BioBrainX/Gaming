@@ -1,9 +1,11 @@
 ﻿clogt('ONImain')
 ;(function () {
-	for (const category in db.Elements)
-		for (const el in db.Elements[category])
-			db.Elements[el] = initEl(db.Elements[category], el, category)
-	for (const category of ['Foods', 'Compostable']) {
+	for (const mainCat of ['Elements', 'Buildings'])
+		for (const category in db[mainCat])
+			for (const el in db[mainCat][category]) initEl(db[mainCat][category], el, category) // db[mainCat][el] =
+	for (const category of ['Creatures', 'Foods', 'Plants'])
+		for (const el in db[category]) initEl(db[category], el, category)
+	for (const category of ['Compostable']) {
 		const elmts = [...db[category]]
 		db[category] = {}
 		for (const el of elmts)
@@ -12,10 +14,11 @@
 
 	function initEl(source, el, category) {
 		db[el] ? (source[el] = db[el]) : (db[el] = source[el])
-		is(db[el]).obj()
-			? db[el].category?.push(category) ?? (db[el].category = [category])
-			: (db[el] = { category: [category] })
-		return db[el]
+		return _.mergeWith(db[el], { category: [category] }, (objValue, srcValue) => {
+			if (_.isArray(objValue)) {
+				return objValue.concat(srcValue)
+			}
+		})
 	}
 
 	for (const category in db.Buildings) xtractIOP(db.Buildings[category], category)
@@ -24,8 +27,8 @@
 	function xtractIOP(data, category) {
 		for (const name in data) {
 			const i_o_p = data[name]
-			db[name] = i_o_p
-			db[name].category?.push(category) ?? (db[name].category = [category])
+			// db[name] ??= i_o_p
+			// db[name].category?.push(category) ?? (db[name].category = [category])
 			for (const iop in i_o_p) {
 				if (iop == 'category') continue
 				//consume,produce,properties
@@ -60,7 +63,9 @@
 									db[el][iopr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
 								else if (val['kcal/C'])
 									db[el][iopr][name]['g/s'] =
-										val['kcal/C'] / foodPrMass / ttlSecPerCycle
+										val['kcal/C'] /
+										(db[el][foodPrMass] || 16e2) /
+										ttlSecPerCycle
 							}
 						}
 					}
@@ -146,7 +151,9 @@ function Calc(t) {
 					if (!target.Ratio[a2b]) {
 						// && target.consume[power] && target.produce[el])
 						target.Ratio[a2b] = target.produce[el][mass] / target.consume[power]
-						db[power].transform[el][t] = db[el].source[power][t] = { Ratio: target.Ratio[a2b] }
+						db[power].transform[el][t] = db[el].source[power][t] = {
+							Ratio: target.Ratio[a2b],
+						}
 					}
 					// clog(el, target.Ratio[a2b])
 
@@ -159,7 +166,9 @@ function Calc(t) {
 						// && target.consume[el] && target.produce[power])
 						target.Ratio[a2b] = target.produce[power] / target.consume[a][mass]
 						for (const el of Get(a).els)
-							db[el].transform[power][t] = db[power].source[el][t] = { Ratio: target.Ratio[a2b] }
+							db[el].transform[power][t] = db[power].source[el][t] = {
+								Ratio: target.Ratio[a2b],
+							}
 					}
 					// clog(el, target.Ratio[a2b])
 
