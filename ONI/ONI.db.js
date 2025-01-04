@@ -352,6 +352,7 @@ const ttlSecPerCycle = 6e2,
 						Wood: { [`g/s`]: 12e2 },
 					},
 					produce: {
+						CO2: { [`g/s`]: 170, [`°C`]: 110 },
 						[`W/s`]: 3e2,
 						[`DTU/s`]: 9e3,
 					},
