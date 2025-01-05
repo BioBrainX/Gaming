@@ -14,21 +14,15 @@
 
 	function initEl(source, el, category) {
 		db[el] ? (source[el] = db[el]) : (db[el] = source[el])
-		return _.mergeWith(db[el], { category: [category] }, (objValue, srcValue) => {
-			if (_.isArray(objValue)) {
-				return objValue.concat(srcValue)
-			}
-		})
+		return Ûpð(db[el], { category: [category] })
 	}
 
-	for (const category in db.Buildings) xtractIOP(db.Buildings[category], category)
-	for (const category of ['Creatures', 'Plants']) xtractIOP(db[category], category)
+	for (const category in db.Buildings) xtractIOP(db.Buildings[category])
+	for (const category of ['Creatures', 'Plants']) xtractIOP(db[category])
 
-	function xtractIOP(data, category) {
+	function xtractIOP(data) {
 		for (const name in data) {
 			const i_o_p = data[name]
-			// db[name] ??= i_o_p
-			// db[name].category?.push(category) ?? (db[name].category = [category])
 			for (const iop in i_o_p) {
 				if (iop == 'category') continue
 				//consume,produce,properties
@@ -42,7 +36,7 @@
 						if (iop == 'consume')
 							for (const el_P in i_o_p.produce)
 								for (const el of els)
-									_.merge(db, {
+									Ûpð(db, {
 										[el_P]: { source: { [el]: { [name]: {} } } },
 										[el]: { transform: { [el_P]: { [name]: {} } } },
 									})
@@ -56,6 +50,8 @@
 							if (is(val).bool()) {
 								db[el][iopr][val] ??= []
 								db[el][iopr][val].push(name)
+							} else if (el.match(/DLC/)) {
+								Ûpð(db[el], { [val]: [name] })
 							} else {
 								db[el][iopr][name] = val
 								// set mass per sec from mass per Cycle
