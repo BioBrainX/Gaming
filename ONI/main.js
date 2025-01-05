@@ -84,12 +84,12 @@ function Calc(t) {
 		heat = 'DTU/s'
 	target.Ratio ??= {}
 	const þ = {
-		Get: {
-			el_data: function (io, el) {
-				const io_data = target[io][el]
-				return io_data[mass] ?? target[io][power] ?? target[io][heat] ?? 0
-			},
-		},
+		// Get: {
+		// 	el_data: function (io, el) {
+		// 		const io_data = target[io][el]
+		// 		return io_data[mass] ?? target[io][power] ?? target[io][heat] ?? 0
+		// 	},
+		// },
 		Ratio: {
 			IO: function () {
 				const Total = { consume: { [mass]: 0 }, produce: { [mass]: 0 } }
@@ -124,7 +124,11 @@ function Calc(t) {
 					const io_data = target[io][elProduce]
 					if (io_data[mass]) Total[io][mass] += Total[io][elProduce] = io_data[mass]
 				}
-				return (target.Ratio.IO ??= Total.produce[mass] / Total.consume[mass])
+				return (
+					Total.produce[mass] &&
+					Total.consume[mass] &&
+					(target.Ratio.IO ??= Total.produce[mass] / Total.consume[mass])
+				)
 			},
 			elements: function (a, b) {
 				const a2b = `${a} → ${b}`,
@@ -213,18 +217,17 @@ function Calc(t) {
 }
 
 function Get(x) {
-	function els() {
-		const db_link = {
-			Compostable: db.Compostable,
-			Foods: db.Foods,
-			Gas: db.Elements.Gas,
-			Liquid: db.Elements.Liquid,
-			Solid: db.Elements.Solid,
-		}
-		return x?.match(/,/) ? x.split(/\s*,\s*/) : db_link[x] ? Object.keys(db_link[x]) : [x]
-	}
 	return {
-		els: els(),
+		els: (function () {
+			const db_link = {
+				Compostable: db.Compostable,
+				Foods: db.Foods,
+				Gas: db.Elements.Gas,
+				Liquid: db.Elements.Liquid,
+				Solid: db.Elements.Solid,
+			}
+			return x?.match(/,/) ? x.split(/\s*,\s*/) : db_link[x] ? Object.keys(db_link[x]) : [x]
+		})(),
 	}
 }
 
