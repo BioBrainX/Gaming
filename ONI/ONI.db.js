@@ -1,9 +1,9 @@
 ﻿clogt('ONIdb')
 
-const ttlSecPerCycle = 6e2,
+const sec = `s`,
+	Cyc = `C`,
+	ttlSecPerCycle = 6e2,
 	mass = 'g',
-	massPrSec = `${mass}/s`,
-	massPrCyc = `${mass}/C`,
 	ttlMassPrUnit = 4e2,
 	food = `kcal`,
 	foodPrMass = `${food}/${mass}`,
@@ -72,11 +72,27 @@ const ttlSecPerCycle = 6e2,
 			},
 			Drecko: {
 				consume: {
-					Mealwood: { [`kcal/C`]: 1e3 },
+					Mealwood: { [`growth/C`]: 0.25 },
 				},
 				produce: {
 					Phosporite: { [`g/C`]: 1e4 },
+					['Reed Fiber']: { ['unit']: 2, [`growth/C`]: 0.13 },
 				},
+				// drop: {
+				// 	meat: { ['g']: 2e3 },
+				// },
+			},
+			['Glossy Drecko']: {
+				consume: {
+					Mealwood: { [`growth/C`]: 0.33 },
+				},
+				produce: {
+					Phosporite: { [`g/C`]: 9e3 },
+					Plastic: { [mass]: 150, [`growth/C`]: 0.33 },
+				},
+				// drop: {
+				// 	meat: { ['g']: 2e3 },
+				// },
 			},
 			Puft: {
 				consume: {
@@ -263,6 +279,10 @@ const ttlSecPerCycle = 6e2,
 						O2: { [`g/s`]: 888, [`°C`]: 70 },
 						H2: { [`g/s`]: 112, [`°C`]: 70 },
 						[`DTU/s`]: 1250,
+					},
+					properties: {
+						floodable: true,
+						// submergeable: true,
 					},
 				},
 				Deodorizer: {
