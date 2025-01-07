@@ -59,9 +59,7 @@
 									db[el][iopr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
 								else if (val['kcal/C'])
 									db[el][iopr][name]['g/s'] =
-										val['kcal/C'] /
-										(db[el][foodPrMass] || 16e2) /
-										ttlSecPerCycle
+										val['kcal/C'] / (db[el]['kcal/g'] || 16e2) / ttlSecPerCycle
 							}
 						}
 					}
@@ -71,7 +69,7 @@
 	}
 })()
 
-function compare(a, b) {}
+// function compare(a, b) {}
 
 function Calc(t) {
 	const target = db[t],
@@ -107,12 +105,12 @@ function Calc(t) {
 							if (elProduce == heat) this.Power.toHeat(elConsume)
 							else this.Power.in(elProduce)
 						}
-					} else if (elConsume == heat) {
-						Total[io][heat] += target[io][heat]
-						for (const elProduce in target.produce) {
-							// clog(elProduce, 'produce')
-							this.Heat.in(elProduce)
-						}
+					// } else if (elConsume == heat) {
+					// 	Total[io][heat] += target[io][heat]
+					// 	for (const elProduce in target.produce) {
+					// 		// clog(elProduce, 'produce')
+					// 		this.Heat.in(elProduce)
+					// 	}
 					}
 				}
 				io = 'produce'
@@ -138,7 +136,7 @@ function Calc(t) {
 					// && el.consume && el.produce)
 					target.Ratio[a2b] = el.produce[mass] / el.consume[mass]
 					for (const el of Get(a).els)
-						db[el].transform[b][t] = db[b].source[el][t] = { Ratio: target.Ratio[a2b] }
+						db[b].source[el][t] = db[el].transform[b][t] = target.Ratio[a2b]
 				}
 				// clog(target.Ratio[a2b])
 
@@ -151,9 +149,7 @@ function Calc(t) {
 					if (!target.Ratio[a2b]) {
 						// && target.consume[power] && target.produce[el])
 						target.Ratio[a2b] = target.produce[el][mass] / target.consume[power]
-						db[power].transform[el][t] = db[el].source[power][t] = {
-							Ratio: target.Ratio[a2b],
-						}
+						db[el].source[power][t] = db[power].transform[el][t] = target.Ratio[a2b]
 					}
 					// clog(el, target.Ratio[a2b])
 
@@ -166,9 +162,7 @@ function Calc(t) {
 						// && target.consume[el] && target.produce[power])
 						target.Ratio[a2b] = target.produce[power] / target.consume[a][mass]
 						for (const el of Get(a).els)
-							db[el].transform[power][t] = db[power].source[el][t] = {
-								Ratio: target.Ratio[a2b],
-							}
+							db[power].source[el][t] = db[el].transform[power][t] = target.Ratio[a2b]
 					}
 					// clog(el, target.Ratio[a2b])
 
@@ -177,31 +171,44 @@ function Calc(t) {
 				toHeat: function () {
 					const a2b = `${power} → ${heat}`
 
-					if (!target.Ratio[a2b])
+					if (!target.Ratio[a2b]) {
 						// && target.consume[power] && target.produce[heat])
 						target.Ratio[a2b] = target.produce[heat] / target.consume[power]
+						// db[power].source[heat][t] = db[heat].transform[power][t] = target.Ratio[a2b]
+						Ûpð(db[power], {
+							source: { [heat]: { [t]: target.Ratio[a2b] } } },
+							// [heat]: { transform: { [power]: { [t]: target.Ratio[a2b] } } },
+						)
+					}
 					// clog(a2b, target.Ratio[a2b])
 
 					return target.Ratio[a2b] // this
 				},
 			},
 			Heat: {
-				in: function (el) {
-					const a2b = `${heat} → ${el}`
+				// in: function (a) {
+				// 	const a2b = `${heat} → ${a}`
 
-					if (!target.Ratio[a2b])
-						// && target.consume[heat] && target.produce[el])
-						target.Ratio[a2b] = target.produce[el][mass] / target.consume[heat]
-					// clog(el, target.Ratio[a2b])
+				// 	if (!target.Ratio[a2b]) {
+				// 		// && target.consume[heat] && target.produce[el])
+				// 		target.Ratio[a2b] = target.produce[a][mass] / target.consume[heat]
+				// 		for (const el of Get(a).els)
+				// 			db[el].source[heat][t] = db[heat].transform[el][t] = target.Ratio[a2b]
+				// 	}
 
-					return target.Ratio[a2b] // this
-				},
-				out: function (el) {
-					const a2b = `${el} → ${heat}`
+				// 	// clog(el, target.Ratio[a2b])
 
-					if (!target.Ratio[a2b])
+				// 	return target.Ratio[a2b] // this
+				// },
+				out: function (a) {
+					const a2b = `${a} → ${heat}`
+
+					if (!target.Ratio[a2b]) {
 						// && target.consume[el] && target.produce[heat])
-						target.Ratio[a2b] = target.produce[heat] / target.consume[el][mass]
+						target.Ratio[a2b] = target.produce[heat] / target.consume[a][mass]
+						for (const el of Get(a).els)
+							db[heat].source[el][t] = db[el].transform[heat][t] = target.Ratio[a2b]
+					}
 					// clog(el, target.Ratio[a2b])
 
 					return target.Ratio[a2b] // this
