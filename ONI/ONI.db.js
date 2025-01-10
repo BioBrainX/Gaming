@@ -323,6 +323,54 @@ const sec = `s`,
 				},
 			},
 			Refinements: {
+				[`Sublimation Station`]: {
+					consume: {
+						[`Polluted Dirt`]: { [`g/s`]: 1e3 },
+						[`W/s`]: 120 / 2,
+					},
+					produce: {
+						[`Polluted O2`]: { [`g/s`]: 660 },
+					},
+					required: {
+						DLC: 'Spaced Out!',
+					},
+				},
+				Lavatory: {
+					consume: {
+						H2O: { [`g/s`]: 5e3 },
+					},
+					produce: {
+						[`Polluted H2O`]: { [`g/s`]: 117e2 },
+						Germ: 105e3,
+						[`DTU/s`]: 250,
+					},
+				},
+				[`Water Sieve`]: {
+					consume: {
+						Sand: { [`g/s`]: 1e3 },
+						[`Polluted H2O`]: { [`g/s`]: 5e3 },
+					},
+					produce: {
+						H2O: { [`g/s`]: 5e3 },
+						[`Polluted Dirt`]: { [`g/s`]: 200 },
+						[`DTU/s`]: 4e3,
+					},
+				},
+				[`Ethanol Distiller`]: {
+					consume: {
+						Wood: { [`g/s`]: 1e3 },
+						[`W/s`]: 120 * 2,
+					},
+					produce: {
+						Ethanol: { [`g/s`]: 5e2, [`°C`]: 73.4 },
+						[`Polluted Dirt`]: { [`g/s`]: 1e3 / 3, [`°C`]: 93.4 },
+						CO2: { [`g/s`]: 5e2 / 3, [`°C`]: 93.4 },
+						[`DTU/s`]: 45e2,
+					},
+					properties: {
+						floodable: false,
+					},
+				},
 				Compost: {
 					consume: {
 						Compostable: { [`g/s`]: 1e2 },
@@ -348,15 +396,15 @@ const sec = `s`,
 						floodable: false,
 					},
 				},
-				[`Water Sieve`]: {
+				[`Algae Distiller`]: {
 					consume: {
-						Sand: { [`g/s`]: 1e3 },
-						[`Polluted H2O`]: { [`g/s`]: 5e3 },
+						Slime: { [`g/s`]: 6e2 },
+						[`W/s`]: 120,
 					},
 					produce: {
-						H2O: { [`g/s`]: 5e3 },
-						[`Polluted Dirt`]: { [`g/s`]: 200 },
-						[`DTU/s`]: 4e3,
+						Algae: { [`g/s`]: 2e2 },
+						[`Polluted H2O`]: { [`g/s`]: 4e2 },
+						[`DTU/s`]: 15e2,
 					},
 				},
 				[`Rock Crusher`]: {
@@ -370,52 +418,15 @@ const sec = `s`,
 
 					// },
 				},
-				Lavatory: {
+				[`Metal Refinery`]: {
 					consume: {
-						H2O: { [`g/s`]: 5e3 },
+						[`W/s`]: 12e2,
+						[`DTU/s`]: 16e3,
 					},
-					produce: {
-						[`Polluted H2O`]: { [`g/s`]: 117e2 },
-						Germ: 105e3,
-						[`DTU/s`]: 250,
-					},
-				},
-				[`Algae Distiller`]: {
-					consume: {
-						Slime: { [`g/s`]: 6e2 },
-						[`W/s`]: 120,
-					},
-					produce: {
-						Algae: { [`g/s`]: 2e2 },
-						[`Polluted H2O`]: { [`g/s`]: 4e2 },
-						[`DTU/s`]: 15e2,
-					},
-				},
-				[`Ethanol Distiller`]: {
-					consume: {
-						Wood: { [`g/s`]: 1e3 },
-						[`W/s`]: 120 * 2,
-					},
-					produce: {
-						Ethanol: { [`g/s`]: 5e2, [`°C`]: 73.4 },
-						[`Polluted Dirt`]: { [`g/s`]: 1e3 / 3, [`°C`]: 93.4 },
-						CO2: { [`g/s`]: 5e2 / 3, [`°C`]: 93.4 },
-						[`DTU/s`]: 45e2,
-					},
+					produce: {},
 					properties: {
-						floodable: false,
-					},
-				},
-				[`Sublimation Station`]: {
-					consume: {
-						[`Polluted Dirt`]: { [`g/s`]: 1e3 },
-						[`W/s`]: 120 / 2,
-					},
-					produce: {
-						[`Polluted O2`]: { [`g/s`]: 660 },
-					},
-					required: {
-						DLC: 'Spaced Out!',
+						decor: -13.5,
+						range: 3,
 					},
 				},
 			},
@@ -449,7 +460,7 @@ const sec = `s`,
 					produce: {
 						CO2: { [`g/s`]: 20, [`°C`]: 110 },
 						[`W/s`]: 6e2,
-						[`DTU/s`]: 9,
+						[`DTU/s`]: 9e3,
 					},
 					properties: {
 						floodable: false,
