@@ -42,18 +42,23 @@ function Trace(a, b) {
 	for (const mainCat of ['Elements', 'Buildings'])
 		for (const category in db[mainCat])
 			for (const el in db[mainCat][category])
-				initEl(db[mainCat][category], el, [mainCat, category]) // db[mainCat][el] =
+				initEl(db[mainCat][category], el, [mainCat, category])
 	for (const category of ['Creatures', 'Foods', 'Plants'])
 		for (const el in db[category]) initEl(db[category], el, [category])
-	for (const category of ['Compostable']) {
+	// handle array category
+	for (const category of ['Compostable', 'Heat']) {
 		const elmts = [...db[category]]
 		db[category] = {}
-		for (const el of elmts)
-			db[category][el] = el.match(/Foods/) ? db.Foods : initEl(elmts, el, [category])
+		for (const el of elmts) initEl(db[category], el, [category])
 	}
 
 	function initEl(source, el, category) {
-		db[el] ? (source[el] = db[el]) : (db[el] = source[el])
+		if (el.match(/Foods/)) for (const e in db[el]) initEl(db[el], e, category)
+		db[el]
+			? (source[el] = db[el])
+			: source[el]
+			? (db[el] = source[el])
+			: (db[el] = source[el] = {})
 		return Ûpð(db[el], { category: [...category] })
 	}
 
@@ -116,7 +121,7 @@ function Calc(t) {
 		mass = 'g/s',
 		power = 'W/s',
 		heat = 'DTU/s'
-	target.ratio ??= {}
+	target.consume && (target.ratio ??= {})
 	const þ = {
 		// Get: {
 		// 	el_data: function (io, el) {
