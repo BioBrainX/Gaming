@@ -18,8 +18,10 @@ const sec = `s`,
 				H2: {},
 				O2: {},
 				['Polluted O2']: {},
+				Steam: {},
 			},
 			Liquid: {
+				['Crude Oil']: {},
 				Ethanol: {},
 				H2O: {},
 				Petroleum: {},
@@ -33,6 +35,7 @@ const sec = `s`,
 				Dirt: {},
 				Fe: {},
 				Fe2O3: {},
+				Ice: {},
 				NaCl: {},
 				Oxylite: {
 					emit: {
@@ -53,13 +56,52 @@ const sec = `s`,
 				Wood: {},
 			},
 		},
+		Heat: [`DTU/s`, `°C`],
+		Combustible: ['Coal', 'Ethanol', 'Natural Gas', 'Petroleum'],
 		Compostable: ['Egg Shell', 'Foods', 'Polluted Dirt', 'Rot Pile', 'Seeds'],
+		Slippery: [
+			'Brackwax',
+			'Brine Ice',
+			'Crude Oil',
+			'Frozen Brackene',
+			'Frozen Phyto Oil',
+			'Gunk',
+			'Ice',
+			'Phyto Oil',
+			'Polluted Ice',
+			'Solid Gunk',
+			'Tallow',
+		],
+		['Trans-State']: {
+			// ['Liquid Element'] :{ [`°C`]: { ['Gas/Solid Element']:ratio } }
+			Brine: {
+				[102.75]: { Steam: 0.7, Salt: 0.3 },
+				[-22.5]: { ['Brine Ice']: 1 },
+			},
+			H2O: {
+				[99.35]: { Steam: 1 },
+				[-0.65]: { Ice: 1 },
+			},
+			['Crude Oil']: {
+				[399.85]: { Petroleum: 1 },
+				[-40.15]: { ['Solid Crude Oil']: 1 },
+			},
+			Petroleum: {
+				[538.85]: { ['Sour Gas']: 1 },
+				[-57.15]: { ['Solid Petroleum']: 1 },
+			},
+			['Salt H2O']: {
+				[99.69]: { Steam: 0.93, Salt: 0.07 },
+				[-7.5]: { Ice: 0.77, Brine: 0.23 },
+			},
+		},
 		Foods: {
 			['Meal Lice']: { ['kcal/g']: 6e2 },
 			['Bristle Berry']: { ['kcal/g']: 16e2 },
 			Pikeapple: { ['kcal/g']: 8e2 },
 			Meat: { ['kcal/g']: 16e2 },
 		},
+		Seeds: [],
 		Creatures: {
 			Dupe: {
 				consume: {
@@ -340,7 +382,7 @@ const sec = `s`,
 						H2O: { [`g/s`]: 5e3 },
 					},
 					produce: {
-						[`Polluted H2O`]: { [`g/s`]: 117e2 },
+						[`Polluted H2O`]: { [`g/s`]: 117e2, [`°C`]: 37 },
 						Germ: 105e3,
 						[`DTU/s`]: 250,
 					},
@@ -526,6 +568,32 @@ const sec = `s`,
 					},
 					produce: {
 						[`W/s`]: 380,
+					},
+					properties: {
+						floodable: false,
+					},
+				},
+			},
+			Station: {
+				['Research Station']: {
+					consume: {
+						Dirt: { [`g/p`]: 5e4 },
+						[`W/s`]: 120 / 2,
+					},
+					produce: {
+						[`DTU/s`]: 1130,
+					},
+					properties: {
+						floodable: false,
+					},
+				},
+				['Super Computer']: {
+					consume: {
+						H2O: { [`g/p`]: 5e4 },
+						[`W/s`]: 120,
+					},
+					produce: {
+						[`DTU/s`]: 45e2,
 					},
 					properties: {
 						floodable: false,

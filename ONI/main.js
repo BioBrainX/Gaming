@@ -46,7 +46,7 @@ function Trace(a, b) {
 	for (const category of ['Creatures', 'Foods', 'Plants'])
 		for (const el in db[category]) initEl(db[category], el, [category])
 	// handle array category
-	for (const category of ['Compostable', 'Heat']) {
+	for (const category of ['Combustible', 'Compostable', 'Heat', 'Slippery']) {
 		const elmts = [...db[category]]
 		db[category] = {}
 		for (const el of elmts) initEl(db[category], el, [category])
