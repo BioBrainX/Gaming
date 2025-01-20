@@ -1,4 +1,4 @@
-﻿clogt('ONImain')
+clogt('ONImain')
 
 function Trace(a, b) {
 	const a2b = `${a} → ${b}`,
@@ -38,83 +38,85 @@ function Trace(a, b) {
 	}
 }
 
-;(function () {
-	for (const mainCat of ['Elements', 'Buildings'])
-		for (const category in db[mainCat])
-			for (const el in db[mainCat][category])
-				initEl(db[mainCat][category], el, [mainCat, category])
-	for (const category of ['Creatures', 'Foods', 'Plants'])
-		for (const el in db[category]) initEl(db[category], el, [category])
-	// handle array category
-	for (const category of ['Combustible', 'Compostable', 'Heat', 'Slippery']) {
-		const elmts = [...db[category]]
-		db[category] = {}
-		for (const el of elmts) initEl(db[category], el, [category])
-	}
 
-	function initEl(source, el, category) {
-		if (el.match(/Foods/)) for (const e in db[el]) initEl(db[el], e, category)
-		db[el]
-			? (source[el] = db[el])
-			: source[el]
-			? (db[el] = source[el])
-			: (db[el] = source[el] = {})
-		return Ûpð(db[el], { category: [...category] })
-	}
+;(function() {
 
-	for (const category in db.Buildings) xtractIOP(db.Buildings[category])
-	for (const category of ['Creatures', 'Plants']) xtractIOP(db[category])
+for (const mainCat of ['Elements', 'Buildings'])
+for (const category in db[mainCat])
+for (const el in db[mainCat][category])
+	initEl(db[mainCat][category], el, [mainCat, category])
 
-	function xtractIOP(data) {
-		for (const name in data) {
-			const i_o_p = data[name]
-			for (const iop in i_o_p) {
-				if (iop == 'category') continue
-				//consume,produce,properties
-				const Elmts = i_o_p[iop]
-				if (is(Elmts).obj())
-					for (const el in Elmts) {
-						const val = Elmts[el],
-							iopr = iop + (iop.match(/e$/) ? 'r' : ''),
-							els = Get(el).els
+for (const category of ['Creatures', 'Foods', 'Plants'])
+for (const el in db[category])
+	initEl(db[category], el, [category])
 
-						if (iop == 'consume')
-							for (const el_P in i_o_p.produce)
-								for (const el of els)
-									Ûpð(db, {
-										[el_P]: { source: { [el]: { [name]: {} } } },
-										[el]: { transform: { [el_P]: { [name]: {} } } },
-									})
+// handle array category
+for (const category of ['Combustible', 'Compostable', 'Heat', 'Slippery']) {
+	const elmts = [...db[category]]
+	db[category] = {}
+	for (const el of elmts) initEl(db[category], el, [category])
+}
 
-						for (const el of els) setIOP(el)
+function initEl(source, el, category) {
+	if (el.match(/Foods/)) for (const e in db[el]) initEl(db[el], e, category)
+	db[el]
+		? (source[el] = db[el])
+		: source[el]
+		? (db[el] = source[el])
+		: (db[el] = source[el] = {})
+	return Ûpð(db[el], { category: [...category] })
+}
 
-						function setIOP(el) {
-							db[el] ??= { [iopr]: {} }
-							db[el][iopr] ??= {}
+for (const category in db.Buildings) xtractIOP(db.Buildings[category])
+for (const category of ['Creatures', 'Plants']) xtractIOP(db[category])
 
-							if (is(val).bool()) {
-								db[el][iopr][val] ??= []
-								db[el][iopr][val].push(name)
-							} else if (el.match(/DLC/)) {
-								Ûpð(db[el], { [val]: [name] })
-							} else {
-								db[el][iopr][name] = val
-								// set mass per sec from mass per Cycle
-								if (val['g/C'])
-									db[el][iopr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
-								else if (val['kcal/C'])
-									db[el][iopr][name]['g/s'] =
-										val['kcal/C'] / (db[el]['kcal/g'] || 16e2) / ttlSecPerCycle
-							}
+function xtractIOP(data) {
+	for (const name in data) {
+		const i_o_p = data[name]
+		for (const iop in i_o_p) {
+			if (iop == 'category') continue
+			//consume,produce,properties
+			const Elmts = i_o_p[iop]
+			if (is(Elmts).obj())
+				for (const el in Elmts) {
+					const val = Elmts[el],
+						iopr = iop + (iop.match(/e$/) ? 'r' : ''),
+						els = Get(el).els
+
+					if (iop == 'consume')
+						for (const el_P in i_o_p.produce)
+							for (const el of els)
+								Ûpð(db, {
+									[el_P]: { source: { [el]: { [name]: {} } } },
+									[el]: { transform: { [el_P]: { [name]: {} } } },
+								})
+
+					for (const el of els) setIOP(el)
+
+					function setIOP(el) {
+						db[el] ??= { [iopr]: {} }
+						db[el][iopr] ??= {}
+
+						if (is(val).bool()) {
+							db[el][iopr][val] ??= []
+							db[el][iopr][val].push(name)
+						} else if (el.match(/DLC/)) {
+							Ûpð(db[el], { [val]: [name] })
+						} else {
+							db[el][iopr][name] = val
+							// set mass per sec from mass per Cycle
+							if (val['g/C'])
+								db[el][iopr][name]['g/s'] = val['g/C'] / ttlSecPerCycle
+							else if (val['kcal/C'])
+								db[el][iopr][name]['g/s'] =
+									val['kcal/C'] / (db[el]['kcal/g'] || 16e2) / ttlSecPerCycle
 						}
 					}
-			}
-			Calc(name).Ratio.IO()
+				}
 		}
+		Calc(name).Ratio.IO()
 	}
-})()
-
-// function compare(a, b) {}
+}
 
 function Calc(t) {
 	const target = db[t],
@@ -122,7 +124,7 @@ function Calc(t) {
 		power = 'W/s',
 		heat = 'DTU/s'
 	target.consume && (target.ratio ??= {})
-	const þ = {
+	const ƒm = {
 		// Get: {
 		// 	el_data: function (io, el) {
 		// 		const io_data = target[io][el]
@@ -131,7 +133,8 @@ function Calc(t) {
 		// },
 		Ratio: {
 			IO: function () {
-				const Total = { consume: { [mass]: 0 }, produce: { [mass]: 0 } }
+				const þ = this,
+					Total = { consume: { [mass]: 0 }, produce: { [mass]: 0 } }
 				let io = 'consume'
 				for (const elConsume in target[io]) {
 					// clog(elConsume, 'consume')
@@ -139,16 +142,16 @@ function Calc(t) {
 					if (io_data[mass]) {
 						Total[io][mass] += Total[io][elConsume] = io_data[mass]
 						for (const elProduce in target.produce) {
-							if (elProduce == power) this.Power.out(elConsume)
-							if (elProduce == heat) this.Heat.out(elConsume)
-							else this.elements(elConsume, elProduce)
+							if (elProduce == power) þ.Power.out(elConsume)
+							if (elProduce == heat) þ.Heat.out(elConsume)
+							else þ.elements(elConsume, elProduce)
 						}
 					} else if (elConsume == power) {
 						Total[io][power] += target[io][power]
 						for (const elProduce in target.produce) {
 							// clog(elProduce, 'produce')
-							if (elProduce == heat) this.Power.toHeat(elConsume)
-							else this.Power.in(elProduce)
+							if (elProduce == heat) þ.Power.toHeat(elConsume)
+							else þ.Power.in(elProduce)
 						}
 						// } else if (elConsume == heat) {
 						// 	Total[io][heat] += target[io][heat]
@@ -264,7 +267,7 @@ function Calc(t) {
 			},
 		},
 	}
-	return þ
+	return ƒm
 }
 
 function Get(x) {
@@ -281,6 +284,10 @@ function Get(x) {
 		})(),
 	}
 }
+
+})()
+
+// function compare(a, b) {}
 
 // localStorage.setItem('ver','0a.00.01')
 
