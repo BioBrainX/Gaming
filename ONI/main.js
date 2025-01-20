@@ -1,9 +1,9 @@
-clogt('ONImain')
+﻿clogt('ONImain')
 
 function Trace(a, b) {
 	const a2b = `${a} → ${b}`,
-		traceAccul = { path: [] },
-		pathTraced = []
+		traceAccul = { ttlConsumed: {} },
+		pathTraced = [a]
 
 	if (db[a].trace?.[a2b]) return db[a].trace[a2b]
 	if (PathingProduction(a, b)) return Ûpð(db[a], { trace: { [a2b]: traceAccul } })
@@ -14,12 +14,13 @@ function Trace(a, b) {
 		if (are(...db[a].category).any.eq('Buildings', 'Plants', 'Creatures')) {
 			for (const elProd in db[a].produce) {
 				clog(`produce: ${elProd}`)
-				if (elProd == b)
+				if (elProd == b) {
+					pathTraced.push(elProd)
 					Ûpð(traceAccul, {
-						path: [a],
+						[a]: {},
 						consume: db[a].consume,
 					})
-				else {
+				} else {
 					traceAccul.path.push(elProd)
 					if (!PathingProduction(elProd, b)) traceAccul.path.pop()
 				}
