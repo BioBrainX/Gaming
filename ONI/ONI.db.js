@@ -471,6 +471,18 @@ const sec = `s`,
 						range: 3,
 					},
 				},
+				Kiln: {
+					consume: {},
+					produce: {
+						[`DTU/s`]: 2e4,
+					},
+					recipes: {
+						Ceramic: {
+							Clay: { g: 1e5 },
+							Coal: { g: 25e3 },
+						},
+					},
+				},
 			},
 			Power: {
 				[`Manual Generator`]: {
